@@ -660,7 +660,44 @@
 		}
 
 		/* ============================================================ */
-		/* ============ SLIDE 4 — AI IN AGRICULTURE (4-VIDEO) ========= */
+		/* ============ SLIDE 4 — WARM-UP TEST ======================== */
+		/* ============================================================ */
+		.pre-test {
+			display: grid;
+			grid-template-columns: 1.3fr 1fr;
+			gap: 60px;
+			align-items: center;
+		}
+
+		.pre-test .qr-block {
+			background: #fff;
+			padding: 20px;
+			border-radius: 20px;
+			border: 1px solid var(--line);
+			box-shadow: 0 20px 50px -20px rgba(0, 0, 0, .15);
+			width: fit-content;
+			margin-left: auto;
+			text-align: center;
+		}
+
+		.pre-test .qr-block img {
+			display: block;
+			width: 280px;
+			height: 280px;
+			image-rendering: pixelated;
+		}
+
+		.pre-test .qr-block .qr-label {
+			margin-top: 10px;
+			font-family: var(--font-mono);
+			font-size: 12px;
+			color: var(--ink-2);
+			text-transform: uppercase;
+			letter-spacing: .14em;
+		}
+
+		/* ============================================================ */
+		/* ============ SLIDE 5 — AI IN AGRICULTURE (4-VIDEO) ========= */
 		/* ============================================================ */
 		.agri-grid {
 			position: absolute;
@@ -1908,6 +1945,8 @@
 							</p>
 						</div>
 						<div class="agenda-list" data-r="3">
+							<div class="item"><span class="num">00</span><span class="label">Boshlang‘ich test —
+									o‘zingizni sinab ko‘ring</span><span class="time">5 daq</span></div>
 							<div class="item"><span class="num">01</span><span class="label">SI qishloq xo‘jaligida —
 									dunyo tajribasi</span><span class="time">10 daq</span></div>
 							<div class="item"><span class="num">02</span><span class="label">Live: Claude.ai — hoziroq
@@ -1926,7 +1965,35 @@
 
 
 				<!-- ============================================== -->
-				<!-- 4. AI IN AGRICULTURE — 4 VIDEO CINEMATIC        -->
+				<!-- 4. WARM-UP TEST                                 -->
+				<!-- ============================================== -->
+				<section class="slide">
+					<div class="eyebrow" data-r="1">Boshlang‘ich test</div>
+					<div class="pre-test" style="margin-top:16px">
+						<div data-r="2">
+							<h2 class="section">
+								Avval o‘zingizni<br>
+								<span style="color:var(--green)">sinab ko‘ring.</span>
+							</h2>
+							<p class="lead" style="margin-top:20px">
+								QR kodni skanerlab qisqa testni to‘ldiring. SI bo‘yicha
+								bilimingizni <strong>darsdan oldin</strong> baholab olamiz —
+								keyin, yakunda, natijani solishtiramiz.
+							</p>
+							<div class="callout" style="margin-top:22px">
+								⏱ <strong>5 daqiqa</strong> · Natijani saqlab qo‘ying — yakunda kerak bo‘ladi.
+							</div>
+						</div>
+						<div class="qr-block" data-r="3">
+							<img src="qr-code-test.png" alt="Boshlang‘ich test — QR kod">
+							<div class="qr-label">Skanerlang</div>
+						</div>
+					</div>
+				</section>
+
+
+				<!-- ============================================== -->
+				<!-- 5. AI IN AGRICULTURE — 4 VIDEO CINEMATIC        -->
 				<!-- ============================================== -->
 				<section class="slide dark" style="padding:0" data-chrome="dark">
 					<div class="agri-grid">
