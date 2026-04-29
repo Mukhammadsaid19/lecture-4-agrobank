@@ -4,12 +4,10 @@
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=1920, initial-scale=1" />
-	<title>Sun'iy intellekt — filial boshlig‘ining qo‘lidagi kuch · Agrobank</title>
+	<title>Promptlash mahorati · 2-sessiya · Agrobank</title>
 
 	<!-- ========================================================== -->
-	<!-- FONTS — Onest is the closest open-source analogue of the    -->
-	<!-- custom "Agrobank" typeface designed by Art. Lebedev Studio  -->
-	<!-- (geometric sans, vertical stroke cuts, open apertures).    -->
+	<!-- FONTS — Onest matches Agrobank's custom (Art. Lebedev) face -->
 	<!-- ========================================================== -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,43 +17,35 @@
 
 	<style>
 		/* ============================================================ */
-		/* DESIGN TOKENS — Agrobank identity (Art. Lebedev Studio, 2021) */
+		/* DESIGN TOKENS — Agrobank identity (carry-over from session 1) */
 		/* ============================================================ */
 		:root {
-			/* Brand — corporate green is the primary */
 			--green: #00A651;
-			/* Agrobank green */
 			--green-dark: #00823F;
 			--green-light: #E6F7ED;
 			--green-mist: #F0FBF4;
 
-			/* Marketing blue used on their presentation covers */
 			--blue: #0066FF;
 			--blue-dark: #0052CC;
 			--blue-light: #E6EFFF;
+			--blue-mist: #F0F5FF;
 
-			/* Surfaces */
 			--ink: #0A0E1A;
-			/* near-black */
 			--ink-2: #4B5563;
-			/* secondary text */
 			--ink-3: #9CA3AF;
-			/* tertiary */
 			--paper: #F7F8FA;
-			/* off-white */
 			--white: #FFFFFF;
 			--line: #E5E7EB;
 			--line-2: #F0F2F5;
 
-			/* Accents */
 			--gold: #F5A623;
 			--red: #EF4444;
+			--violet: #7C3AED;
+			--coral: #FB7185;
 
-			/* Motion */
 			--ease: cubic-bezier(.2, .7, .2, 1);
 			--ease-out: cubic-bezier(.16, 1, .3, 1);
 
-			/* Type */
 			--font: "Onest", system-ui, sans-serif;
 			--font-mono: "JetBrains Mono", ui-monospace, monospace;
 		}
@@ -119,7 +109,7 @@
 		}
 
 		/* ============================================================ */
-		/* PERSISTENT CHROME — logo, zoom pill, counter                 */
+		/* PERSISTENT CHROME — logo, session pill, counter              */
 		/* ============================================================ */
 		.chrome {
 			position: absolute;
@@ -156,10 +146,10 @@
 			align-items: center;
 			gap: 10px;
 			padding: 8px 16px 8px 14px;
-			background: rgba(239, 68, 68, .08);
-			border: 1px solid rgba(239, 68, 68, .2);
+			background: rgba(0, 102, 255, .08);
+			border: 1px solid rgba(0, 102, 255, .2);
 			border-radius: 999px;
-			color: var(--red);
+			color: var(--blue);
 			font-size: 13px;
 			font-weight: 600;
 			letter-spacing: .04em;
@@ -170,22 +160,22 @@
 			width: 8px;
 			height: 8px;
 			border-radius: 50%;
-			background: var(--red);
-			box-shadow: 0 0 0 0 rgba(239, 68, 68, .7);
+			background: var(--blue);
+			box-shadow: 0 0 0 0 rgba(0, 102, 255, .7);
 			animation: pulse 1.6s infinite;
 		}
 
 		@keyframes pulse {
 			0% {
-				box-shadow: 0 0 0 0 rgba(239, 68, 68, .6)
+				box-shadow: 0 0 0 0 rgba(0, 102, 255, .6)
 			}
 
 			70% {
-				box-shadow: 0 0 0 10px rgba(239, 68, 68, 0)
+				box-shadow: 0 0 0 10px rgba(0, 102, 255, 0)
 			}
 
 			100% {
-				box-shadow: 0 0 0 0 rgba(239, 68, 68, 0)
+				box-shadow: 0 0 0 0 rgba(0, 102, 255, 0)
 			}
 		}
 
@@ -215,24 +205,6 @@
 			background: linear-gradient(90deg, var(--green), var(--blue));
 			width: 0%;
 			transition: width .6s var(--ease);
-		}
-
-		/* hide chrome on cover */
-		.slide.no-chrome~.chrome-mask {
-			display: block
-		}
-
-		/* Dark slides — invert chrome colors */
-		.slide.dark+.chrome-wrap .brand .brand-logo {
-			color: #fff
-		}
-
-		.deck.dark-chrome .chrome .brand .brand-logo {
-			color: #fff
-		}
-
-		.deck.dark-chrome .chrome .counter {
-			color: rgba(255, 255, 255, .5)
 		}
 
 		/* ============================================================ */
@@ -285,6 +257,22 @@
 			background: var(--ink-2)
 		}
 
+		.eyebrow.violet {
+			color: var(--violet)
+		}
+
+		.eyebrow.violet::before {
+			background: var(--violet)
+		}
+
+		.eyebrow.red {
+			color: var(--red)
+		}
+
+		.eyebrow.red::before {
+			background: var(--red)
+		}
+
 		h1.display {
 			font-size: clamp(48px, 6.2vw, 104px);
 			font-weight: 700;
@@ -292,10 +280,6 @@
 			letter-spacing: -.035em;
 			color: var(--ink);
 			max-width: 18ch;
-		}
-
-		h1.display.tight {
-			max-width: 15ch
 		}
 
 		h2.section {
@@ -320,9 +304,7 @@
 			font-weight: 600
 		}
 
-		/* ============================================================ */
-		/* ANIMATIONS — stagger reveal on slide enter                   */
-		/* ============================================================ */
+		/* Stagger reveal */
 		.slide [data-r] {
 			opacity: 0;
 			transform: translateY(24px);
@@ -366,7 +348,6 @@
 			transition-delay: .92s
 		}
 
-		/* Scale-in for big numbers */
 		.slide [data-scale] {
 			opacity: 0;
 			transform: scale(.88);
@@ -378,45 +359,41 @@
 			transform: scale(1);
 		}
 
-		/* ============================================================ */
-		/* BACKGROUND PATTERNS (Uzbek ornament — diamond grid)          */
-		/* ============================================================ */
-		.pattern-bg {
-			position: absolute;
-			inset: 0;
-			pointer-events: none;
-			opacity: .045;
-			background-image:
-				linear-gradient(45deg, var(--ink) 25%, transparent 25%),
-				linear-gradient(-45deg, var(--ink) 25%, transparent 25%),
-				linear-gradient(45deg, transparent 75%, var(--ink) 75%),
-				linear-gradient(-45deg, transparent 75%, var(--ink) 75%);
-			background-size: 28px 28px;
-			background-position: 0 0, 0 14px, 14px -14px, -14px 0;
+		/* Callout */
+		.callout {
+			display: block;
+			padding: 16px 22px;
+			background: var(--green-mist);
+			border-left: 4px solid var(--green);
+			border-radius: 6px;
+			font-size: 16px;
+			color: var(--ink);
+			max-width: 64ch;
+			line-height: 1.5;
 		}
 
-		/* Soft Agrobank diamond motif — single large diamond in corner */
-		.diamond-motif {
-			position: absolute;
-			width: 680px;
-			height: 680px;
-			right: -140px;
-			bottom: -140px;
-			background:
-				linear-gradient(135deg, transparent 48%, var(--green) 48%, var(--green) 52%, transparent 52%),
-				linear-gradient(45deg, transparent 48%, var(--green) 48%, var(--green) 52%, transparent 52%);
-			opacity: .05;
-			transform: rotate(0deg);
-			pointer-events: none;
+		.callout.blue {
+			background: var(--blue-mist);
+			border-left-color: var(--blue);
+		}
+
+		.callout.violet {
+			background: #F5F0FF;
+			border-left-color: var(--violet);
+		}
+
+		.callout.gold {
+			background: #FFF8E5;
+			border-left-color: var(--gold);
 		}
 
 		/* ============================================================ */
-		/* ======================= SLIDE 1 — COVER =================== */
+		/* COVER                                                         */
 		/* ============================================================ */
 		.cover {
 			background:
-				radial-gradient(ellipse at 80% 0%, rgba(0, 166, 81, .15) 0%, transparent 50%),
-				radial-gradient(ellipse at 0% 100%, rgba(0, 102, 255, .10) 0%, transparent 40%),
+				radial-gradient(ellipse at 80% 0%, rgba(0, 102, 255, .18) 0%, transparent 50%),
+				radial-gradient(ellipse at 0% 100%, rgba(0, 166, 81, .14) 0%, transparent 40%),
 				linear-gradient(180deg, #050914 0%, #0A1428 100%);
 			color: #fff;
 			padding: 110px 88px 88px;
@@ -456,6 +433,13 @@
 			letter-spacing: .02em;
 		}
 
+		.cover .badge.session2 {
+			background: rgba(0, 102, 255, .15);
+			border-color: rgba(0, 102, 255, .35);
+			color: #6EA8FF;
+			font-weight: 600;
+		}
+
 		.cover .badge .green-dot {
 			width: 8px;
 			height: 8px;
@@ -474,6 +458,13 @@
 		}
 
 		.cover h1 .hl {
+			background: linear-gradient(135deg, #6EA8FF 0%, #0066FF 100%);
+			-webkit-background-clip: text;
+			background-clip: text;
+			color: transparent;
+		}
+
+		.cover h1 .hl-green {
 			background: linear-gradient(135deg, #34D870 0%, #00A651 100%);
 			-webkit-background-clip: text;
 			background-clip: text;
@@ -485,7 +476,7 @@
 			left: 88px;
 			bottom: 88px;
 			display: flex;
-			gap: 72px;
+			gap: 56px;
 		}
 
 		.cover .meta .k {
@@ -497,7 +488,7 @@
 		}
 
 		.cover .meta .v {
-			font-size: 18px;
+			font-size: 17px;
 			font-weight: 500;
 			color: #fff;
 		}
@@ -531,11 +522,11 @@
 			width: 380px;
 			height: 380px;
 			pointer-events: none;
-			filter: drop-shadow(0 30px 80px rgba(0, 166, 81, .35));
+			filter: drop-shadow(0 30px 80px rgba(0, 102, 255, .35));
 		}
 
 		/* ============================================================ */
-		/* ==================== SLIDE 2 — ABOUT ME ==================== */
+		/* ABOUT ME — carried over from session 1                        */
 		/* ============================================================ */
 		.about {
 			display: grid;
@@ -547,8 +538,7 @@
 		.about .photo-slot {
 			aspect-ratio: 4/5;
 			border-radius: 24px;
-			background:
-				linear-gradient(135deg, var(--green-light) 0%, var(--blue-light) 100%);
+			background: linear-gradient(135deg, var(--green-light) 0%, var(--blue-light) 100%);
 			position: relative;
 			overflow: hidden;
 			box-shadow: 0 20px 60px -20px rgba(0, 0, 0, .2);
@@ -603,11 +593,119 @@
 
 		.logos .chip.dim {
 			color: var(--ink-2);
-			font-weight: 500
+			font-weight: 500;
 		}
 
 		/* ============================================================ */
-		/* =================== SLIDE 3 — AGENDA ======================= */
+		/* RECAP — session 1 reminder                                    */
+		/* ============================================================ */
+		.recap {
+			display: grid;
+			grid-template-columns: 1.1fr 1fr;
+			gap: 64px;
+			align-items: center;
+		}
+
+		.recap-card-list {
+			display: flex;
+			flex-direction: column;
+			gap: 14px;
+		}
+
+		.recap-card {
+			padding: 20px 24px;
+			background: var(--paper);
+			border: 1px solid var(--line);
+			border-radius: 14px;
+			display: grid;
+			grid-template-columns: 36px 1fr;
+			gap: 18px;
+			align-items: start;
+		}
+
+		.recap-card .num {
+			width: 36px;
+			height: 36px;
+			border-radius: 10px;
+			background: var(--green-mist);
+			color: var(--green);
+			display: grid;
+			place-items: center;
+			font-family: var(--font-mono);
+			font-weight: 700;
+			font-size: 13px;
+		}
+
+		.recap-card h5 {
+			font-size: 17px;
+			font-weight: 600;
+			color: var(--ink);
+			margin-bottom: 4px;
+			letter-spacing: -.005em;
+		}
+
+		.recap-card p {
+			font-size: 13.5px;
+			color: var(--ink-2);
+			line-height: 1.45;
+		}
+
+		.recap .arrow-block {
+			padding: 32px;
+			border-radius: 22px;
+			background: linear-gradient(135deg, var(--ink), #1A2238);
+			color: #fff;
+			position: relative;
+			overflow: hidden;
+		}
+
+		.recap .arrow-block::before {
+			content: "";
+			position: absolute;
+			top: -40%;
+			right: -20%;
+			width: 360px;
+			height: 360px;
+			background: radial-gradient(circle, rgba(0, 102, 255, .35) 0%, transparent 70%);
+			filter: blur(40px);
+		}
+
+		.recap .arrow-block .lab {
+			position: relative;
+			font-family: var(--font-mono);
+			font-size: 11px;
+			letter-spacing: .14em;
+			text-transform: uppercase;
+			color: rgba(255, 255, 255, .55);
+			margin-bottom: 16px;
+		}
+
+		.recap .arrow-block h3 {
+			position: relative;
+			font-size: 36px;
+			font-weight: 700;
+			letter-spacing: -.02em;
+			line-height: 1.06;
+			margin-bottom: 14px;
+		}
+
+		.recap .arrow-block h3 .hl {
+			background: linear-gradient(135deg, #34D870, #6EA8FF);
+			-webkit-background-clip: text;
+			background-clip: text;
+			color: transparent;
+		}
+
+		.recap .arrow-block p {
+			position: relative;
+			font-size: 15px;
+			color: rgba(255, 255, 255, .75);
+			line-height: 1.5;
+			max-width: 32ch;
+		}
+
+		/* ============================================================ */
+		/* AGENDA                                                         */
 		/* ============================================================ */
 		.agenda {
 			display: grid;
@@ -627,7 +725,7 @@
 			display: grid;
 			grid-template-columns: 80px 1fr auto;
 			gap: 24px;
-			padding: 24px 0;
+			padding: 20px 0;
 			border-bottom: 1px solid var(--line);
 			align-items: center;
 			transition: all .4s var(--ease);
@@ -635,7 +733,7 @@
 
 		.agenda-list .item:hover {
 			padding-left: 12px;
-			background: linear-gradient(90deg, var(--green-light), transparent);
+			background: linear-gradient(90deg, var(--blue-mist), transparent);
 		}
 
 		.agenda-list .item .num {
@@ -646,7 +744,7 @@
 		}
 
 		.agenda-list .item .label {
-			font-size: 22px;
+			font-size: 20px;
 			font-weight: 600;
 			letter-spacing: -.01em;
 			color: var(--ink);
@@ -660,34 +758,33 @@
 		}
 
 		/* ============================================================ */
-		/* ============ SLIDE 4 — WARM-UP TEST ======================== */
+		/* EXPERIMENT — one prompt many answers                          */
 		/* ============================================================ */
-		.pre-test {
+		.experiment {
 			display: grid;
-			grid-template-columns: 1.3fr 1fr;
-			gap: 60px;
+			grid-template-columns: 1.1fr 1fr;
+			gap: 56px;
 			align-items: center;
 		}
 
-		.pre-test .qr-block {
+		.experiment .qr-block {
 			background: #fff;
 			padding: 20px;
 			border-radius: 20px;
 			border: 1px solid var(--line);
 			box-shadow: 0 20px 50px -20px rgba(0, 0, 0, .15);
 			width: fit-content;
-			margin-left: auto;
 			text-align: center;
 		}
 
-		.pre-test .qr-block img {
+		.experiment .qr-block img {
 			display: block;
-			width: 280px;
-			height: 280px;
+			width: 220px;
+			height: 220px;
 			image-rendering: pixelated;
 		}
 
-		.pre-test .qr-block .qr-label {
+		.experiment .qr-block .qr-label {
 			margin-top: 10px;
 			font-family: var(--font-mono);
 			font-size: 12px;
@@ -696,868 +793,1125 @@
 			letter-spacing: .14em;
 		}
 
-		/* ============================================================ */
-		/* ============ SLIDE 5 — AI IN AGRICULTURE (4-VIDEO) ========= */
-		/* ============================================================ */
-		.agri-grid {
-			position: absolute;
-			inset: 0;
-			display: grid;
-			grid-template-columns: 1fr 1fr;
-			grid-template-rows: 1fr 1fr;
-			gap: 4px;
-			background: #000;
-			padding: 0;
-		}
-
-		.agri-tile {
-			position: relative;
-			overflow: hidden;
-			background: #0A1428;
-		}
-
-		.agri-tile video,
-		.agri-tile img {
-			position: absolute;
-			inset: 0;
-			width: 100%;
-			height: 100%;
-			object-fit: cover;
-			filter: saturate(1.08) contrast(1.02);
-		}
-
-		/* fallback gradient when no video source */
-		.agri-tile[data-fallback="drone"] {
-			background: linear-gradient(135deg, #0F5E2F, #2DB853);
-		}
-
-		.agri-tile[data-fallback="harvest"] {
-			background: linear-gradient(135deg, #6B4423, #C08853);
-		}
-
-		.agri-tile[data-fallback="vision"] {
-			background: linear-gradient(135deg, #1E3A5F, #4A90E2);
-		}
-
-		.agri-tile[data-fallback="green"] {
-			background: linear-gradient(135deg, #1A3D1A, #5FBE5F);
-		}
-
-		.agri-tile::after {
-			content: "";
-			position: absolute;
-			inset: 0;
-			background: linear-gradient(180deg, transparent 50%, rgba(0, 0, 0, .75) 100%);
-			pointer-events: none;
-		}
-
-		.agri-caption {
-			position: absolute;
-			left: 36px;
-			bottom: 36px;
-			z-index: 2;
+		.exp-prompt {
+			margin-top: 22px;
+			padding: 22px 26px;
+			background: var(--ink);
 			color: #fff;
-			max-width: 80%;
+			border-radius: 14px;
+			font-family: var(--font-mono);
+			font-size: 16px;
+			line-height: 1.5;
+			letter-spacing: .005em;
+			max-width: 56ch;
+			position: relative;
 		}
 
-		.agri-caption .tag {
-			display: inline-block;
-			padding: 6px 12px;
-			background: rgba(0, 166, 81, .9);
+		.exp-prompt::before {
+			content: "PROMPT";
+			position: absolute;
+			top: -10px;
+			left: 22px;
+			background: var(--ink);
+			padding: 0 10px;
 			font-size: 11px;
-			font-weight: 700;
 			letter-spacing: .14em;
-			text-transform: uppercase;
-			border-radius: 999px;
-			margin-bottom: 14px;
+			color: var(--green);
+			font-weight: 700;
+			font-family: var(--font);
 		}
 
-		.agri-caption h3 {
-			font-size: 32px;
-			font-weight: 700;
-			line-height: 1.05;
-			letter-spacing: -.02em;
+		.exp-side {
+			display: flex;
+			flex-direction: column;
+			gap: 14px;
+		}
+
+		.exp-side .ans-card {
+			padding: 14px 18px;
+			background: var(--paper);
+			border: 1px solid var(--line);
+			border-radius: 12px;
+		}
+
+		.exp-side .ans-card .name {
+			font-family: var(--font-mono);
+			font-size: 11px;
+			color: var(--ink-3);
+			letter-spacing: .1em;
+			text-transform: uppercase;
 			margin-bottom: 6px;
 		}
 
-		.agri-caption p {
+		.exp-side .ans-card .ans {
 			font-size: 14px;
-			color: rgba(255, 255, 255, .75);
-			max-width: 28ch;
+			color: var(--ink);
+			line-height: 1.45;
 		}
 
-		.agri-banner {
-			position: absolute;
-			left: 50%;
-			top: 50%;
-			transform: translate(-50%, -50%);
-			z-index: 10;
-			text-align: center;
-			pointer-events: none;
-			padding: 56px 72px;
-			background: radial-gradient(ellipse at center, rgba(5, 9, 20, .92) 0%, rgba(5, 9, 20, .65) 60%, transparent 100%);
-			border-radius: 32px;
-			max-width: 80%;
+		.exp-side .ans-card.ok {
+			background: var(--green-mist);
+			border-color: #BBF0CC
 		}
 
-		.agri-banner .kicker {
-			display: inline-block;
-			padding: 10px 20px;
-			background: rgba(255, 255, 255, .12);
-			backdrop-filter: blur(20px);
-			border: 1px solid rgba(255, 255, 255, .2);
-			border-radius: 999px;
-			font-size: 12px;
-			letter-spacing: .2em;
-			text-transform: uppercase;
-			color: #fff;
-			font-weight: 600;
-			margin-bottom: 24px;
-		}
-
-		.agri-banner h2 {
-			font-size: 76px;
-			font-weight: 700;
-			letter-spacing: -.03em;
-			color: #fff;
-			line-height: .98;
-			text-shadow: 0 8px 32px rgba(0, 0, 0, .6);
-		}
-
-		.agri-banner h2 .hl {
-			background: linear-gradient(135deg, #34D870, #0066FF);
-			-webkit-background-clip: text;
-			background-clip: text;
-			color: transparent;
-		}
-
-		/* ============================================================ */
-		/* ============ SLIDE — ICE BREAKER ============================ */
-		/* ============================================================ */
-		.icebreak {
-			display: grid;
-			grid-template-columns: 1.2fr 1fr;
-			gap: 48px;
-			align-items: center;
-		}
-
-		.icebreak .url-card {
-			padding: 32px;
-			background: var(--ink);
-			border-radius: 24px;
-			position: relative;
-			color: #fff;
-			overflow: hidden;
-		}
-
-		.icebreak .url-card::before {
-			content: "";
-			position: absolute;
-			top: -50%;
-			right: -20%;
-			width: 400px;
-			height: 400px;
-			background: radial-gradient(circle, rgba(0, 166, 81, .4) 0%, transparent 70%);
-			filter: blur(40px);
-		}
-
-		.icebreak .url-card .small {
-			font-family: var(--font-mono);
-			font-size: 13px;
-			color: rgba(255, 255, 255, .5);
-			letter-spacing: .08em;
-			text-transform: uppercase;
-			margin-bottom: 14px;
-			position: relative;
-		}
-
-		.icebreak .url-card .big {
-			font-size: 54px;
-			font-weight: 700;
-			letter-spacing: -.03em;
-			line-height: 1;
-			position: relative;
-			color: #fff;
-		}
-
-		.icebreak .url-card .big .slash {
+		.exp-side .ans-card.ok .name {
 			color: var(--green)
 		}
 
-		.icebreak .qr-frame {
-			margin-top: 20px;
-			padding: 16px;
-			background: #fff;
-			border-radius: 16px;
-			width: fit-content;
-			position: relative;
-		}
-
-		.icebreak .qr-frame img {
-			display: block;
-			width: 160px;
-			height: 160px
-		}
-
-		.icebreak .url-card .qr-row {
+		/* ============================================================ */
+		/* IMPACT STATS                                                   */
+		/* ============================================================ */
+		.impact-grid {
 			display: grid;
-			grid-template-columns: 1fr auto 1fr;
-			gap: 16px;
-			align-items: center;
-			margin-top: 14px;
-			position: relative;
+			grid-template-columns: repeat(3, 1fr);
+			gap: 24px;
+			margin-top: 56px;
 		}
 
-		.icebreak .url-card .qr-option {
-			display: flex;
-			flex-direction: column;
-			align-items: flex-start;
-			gap: 10px;
-		}
-
-		.icebreak .url-card .qr-option .big {
-			font-size: 30px;
-			line-height: 1
-		}
-
-		.icebreak .url-card .qr-row .qr-frame {
-			margin-top: 0;
-			padding: 10px
-		}
-
-		.icebreak .url-card .qr-row .qr-frame img {
-			width: 108px;
-			height: 108px
-		}
-
-		.icebreak .url-card .qr-sep {
-			font-family: var(--font-mono);
-			font-size: 13px;
-			color: rgba(255, 255, 255, .55);
-			text-transform: uppercase;
-			letter-spacing: .14em;
-			align-self: center;
-			position: relative;
-		}
-
-		.task-list {
-			display: flex;
-			flex-direction: column;
-			gap: 10px;
-		}
-
-		.task-card {
-			padding: 18px 24px;
+		.impact-cell {
+			padding: 36px 32px;
+			border-radius: 22px;
 			background: var(--paper);
 			border: 1px solid var(--line);
+			position: relative;
+			overflow: hidden;
+		}
+
+		.impact-cell.green {
+			background: linear-gradient(180deg, #FFFFFF, var(--green-mist));
+			border-color: #BBF0CC
+		}
+
+		.impact-cell.blue {
+			background: linear-gradient(180deg, #FFFFFF, var(--blue-mist));
+			border-color: #B7CFFF
+		}
+
+		.impact-cell.gold {
+			background: linear-gradient(180deg, #FFFFFF, #FFF8E5);
+			border-color: #FFD588
+		}
+
+		.impact-cell .lbl {
+			font-size: 12px;
+			letter-spacing: .14em;
+			text-transform: uppercase;
+			color: var(--ink-3);
+			font-weight: 600;
+			margin-bottom: 14px;
+		}
+
+		.impact-cell .num {
+			font-size: 76px;
+			font-weight: 700;
+			line-height: 1;
+			letter-spacing: -.04em;
+			color: var(--ink);
+			font-variant-numeric: tabular-nums;
+			margin-bottom: 12px;
+		}
+
+		.impact-cell.green .num {
+			color: var(--green)
+		}
+
+		.impact-cell.blue .num {
+			color: var(--blue)
+		}
+
+		.impact-cell.gold .num {
+			color: #C68611
+		}
+
+		.impact-cell .num .unit {
+			font-size: 32px;
+			font-weight: 600;
+			margin-left: 4px;
+			letter-spacing: -.02em;
+		}
+
+		.impact-cell .desc {
+			font-size: 14.5px;
+			color: var(--ink-2);
+			line-height: 1.5;
+			max-width: 28ch;
+		}
+
+		/* ============================================================ */
+		/* PROMPT ANATOMY — RKTFE diagram                                */
+		/* ============================================================ */
+		.anatomy {
+			display: grid;
+			grid-template-columns: 1fr 1.4fr;
+			gap: 56px;
+			align-items: start;
+		}
+
+		.anatomy .anatomy-stack {
+			display: flex;
+			flex-direction: column;
+			gap: 10px;
+		}
+
+		.anatomy-row {
+			display: grid;
+			grid-template-columns: 64px 1fr;
+			gap: 18px;
+			align-items: stretch;
+		}
+
+		.anatomy-row .letter {
+			background: var(--green);
+			color: #fff;
+			border-radius: 14px;
+			display: grid;
+			place-items: center;
+			font-size: 28px;
+			font-weight: 800;
+			letter-spacing: -.02em;
+			box-shadow: 0 8px 20px -6px rgba(0, 166, 81, .3);
+		}
+
+		.anatomy-row.k .letter {
+			background: var(--blue);
+			box-shadow: 0 8px 20px -6px rgba(0, 102, 255, .3)
+		}
+
+		.anatomy-row.t .letter {
+			background: var(--violet);
+			box-shadow: 0 8px 20px -6px rgba(124, 58, 237, .3)
+		}
+
+		.anatomy-row.f .letter {
+			background: var(--gold);
+			box-shadow: 0 8px 20px -6px rgba(245, 166, 35, .3)
+		}
+
+		.anatomy-row.e .letter {
+			background: var(--coral);
+			box-shadow: 0 8px 20px -6px rgba(251, 113, 133, .3)
+		}
+
+		.anatomy-row .body {
+			padding: 14px 22px;
+			background: var(--paper);
+			border: 1px solid var(--line);
+			border-radius: 14px;
+			display: flex;
+			align-items: center;
+			gap: 18px;
+		}
+
+		.anatomy-row .body .name {
+			font-size: 18px;
+			font-weight: 600;
+			color: var(--ink);
+			min-width: 110px;
+		}
+
+		.anatomy-row .body .desc {
+			font-size: 14px;
+			color: var(--ink-2);
+			line-height: 1.45;
+		}
+
+		.anatomy .ex-prompt {
+			padding: 26px 30px;
+			background: var(--ink);
+			color: #fff;
 			border-radius: 18px;
+			font-family: var(--font-mono);
+			font-size: 14.5px;
+			line-height: 1.65;
+			position: relative;
+			overflow: hidden;
+		}
+
+		.anatomy .ex-prompt::before {
+			content: "MUKAMMAL PROMPT NAMUNASI";
+			position: absolute;
+			top: 16px;
+			right: 22px;
+			font-family: var(--font);
+			font-size: 10px;
+			letter-spacing: .14em;
+			color: rgba(255, 255, 255, .35);
+			font-weight: 600;
+		}
+
+		.anatomy .ex-prompt .h-r {
+			color: #34D870;
+			font-weight: 600
+		}
+
+		.anatomy .ex-prompt .h-k {
+			color: #6EA8FF;
+			font-weight: 600
+		}
+
+		.anatomy .ex-prompt .h-t {
+			color: #C4A6FF;
+			font-weight: 600
+		}
+
+		.anatomy .ex-prompt .h-f {
+			color: #FFD588;
+			font-weight: 600
+		}
+
+		.anatomy .ex-prompt .h-e {
+			color: #FFB6C1;
+			font-weight: 600
+		}
+
+		.anatomy .ex-prompt p {
+			margin-top: 14px
+		}
+
+		.anatomy .ex-prompt p:first-of-type {
+			margin-top: 28px
+		}
+
+		/* ============================================================ */
+		/* BAD vs GOOD                                                    */
+		/* ============================================================ */
+		.compare {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 24px;
+			margin-top: 28px;
+		}
+
+		.cmp-card {
+			padding: 26px;
+			border-radius: 18px;
+			border: 1px solid var(--line);
+			display: flex;
+			flex-direction: column;
+			gap: 16px;
+		}
+
+		.cmp-card.bad {
+			background: linear-gradient(180deg, #FEF2F2, #FFFFFF);
+			border-color: #FECACA;
+		}
+
+		.cmp-card.good {
+			background: linear-gradient(180deg, var(--green-mist), #FFFFFF);
+			border-color: #BBF0CC;
+		}
+
+		.cmp-card .head {
+			display: flex;
+			align-items: center;
+			gap: 12px;
+		}
+
+		.cmp-card .head .pill {
+			font-size: 11px;
+			padding: 4px 10px;
+			border-radius: 999px;
+			font-weight: 700;
+			letter-spacing: .14em;
+			text-transform: uppercase;
+		}
+
+		.cmp-card.bad .head .pill {
+			background: var(--red);
+			color: #fff
+		}
+
+		.cmp-card.good .head .pill {
+			background: var(--green);
+			color: #fff
+		}
+
+		.cmp-card .head h4 {
+			font-size: 22px;
+			font-weight: 700;
+			color: var(--ink);
+			letter-spacing: -.02em;
+		}
+
+		.cmp-card .pmt {
+			padding: 14px 16px;
+			background: #fff;
+			border: 1px solid var(--line);
+			border-radius: 10px;
+			font-family: var(--font-mono);
+			font-size: 13px;
+			color: var(--ink);
+			line-height: 1.55;
+		}
+
+		.cmp-card .pmt .h-r {
+			color: var(--green);
+			font-weight: 600
+		}
+
+		.cmp-card .pmt .h-k {
+			color: var(--blue);
+			font-weight: 600
+		}
+
+		.cmp-card .pmt .h-t {
+			color: var(--violet);
+			font-weight: 600
+		}
+
+		.cmp-card .pmt .h-f {
+			color: #C68611;
+			font-weight: 600
+		}
+
+		.cmp-card .out {
+			padding: 12px 16px;
+			background: rgba(255, 255, 255, .8);
+			border: 1px dashed var(--line);
+			border-radius: 10px;
+			font-size: 13px;
+			color: var(--ink-2);
+			line-height: 1.55;
+		}
+
+		.cmp-card .out strong {
+			color: var(--ink)
+		}
+
+		.cmp-card .out::before {
+			content: "→ NATIJA";
+			display: block;
+			font-family: var(--font);
+			font-size: 10px;
+			letter-spacing: .14em;
+			font-weight: 700;
+			color: var(--ink-3);
+			margin-bottom: 6px;
+		}
+
+		/* ============================================================ */
+		/* DEMO — meeting → action plan                                  */
+		/* ============================================================ */
+		.demo-flow {
+			display: grid;
+			grid-template-columns: 1fr 80px 1fr;
+			gap: 16px;
+			align-items: stretch;
+			margin-top: 24px;
+		}
+
+		.demo-arrow {
+			display: grid;
+			place-items: center;
+			color: var(--ink-3);
+		}
+
+		.demo-arrow .arr {
+			font-size: 56px;
+			font-weight: 200;
+			line-height: 1;
+		}
+
+		.demo-arrow .lab {
+			margin-top: 8px;
+			font-family: var(--font-mono);
+			font-size: 11px;
+			letter-spacing: .14em;
+			text-transform: uppercase;
+			color: var(--ink-3);
+			text-align: center;
+		}
+
+		.demo-card {
+			padding: 22px 26px;
+			border-radius: 18px;
+			border: 1px solid var(--line);
+			background: #fff;
+			display: flex;
+			flex-direction: column;
+			min-height: 380px;
+		}
+
+		.demo-card.in {
+			background: linear-gradient(180deg, #FEF7E5, #FFFFFF);
+			border-color: #FFD588;
+		}
+
+		.demo-card.out {
+			background: linear-gradient(180deg, var(--green-mist), #FFFFFF);
+			border-color: #BBF0CC;
+		}
+
+		.demo-card .src {
+			font-family: var(--font-mono);
+			font-size: 11px;
+			letter-spacing: .14em;
+			text-transform: uppercase;
+			color: var(--ink-3);
+			margin-bottom: 10px;
+		}
+
+		.demo-card .src strong {
+			color: var(--ink)
+		}
+
+		.demo-card h4 {
+			font-size: 19px;
+			font-weight: 600;
+			color: var(--ink);
+			margin-bottom: 12px;
+			letter-spacing: -.01em;
+		}
+
+		.demo-card .raw {
+			font-family: var(--font-mono);
+			font-size: 12.5px;
+			color: var(--ink-2);
+			line-height: 1.65;
+			white-space: pre-wrap;
+			background: #fff;
+			padding: 12px 14px;
+			border-radius: 10px;
+			border: 1px solid var(--line);
+			flex: 1;
+		}
+
+		.demo-card .actions {
+			display: flex;
+			flex-direction: column;
+			gap: 8px;
+			flex: 1;
+		}
+
+		.demo-card .action-row {
+			display: grid;
+			grid-template-columns: 28px 1fr auto auto;
+			gap: 12px;
+			padding: 10px 12px;
+			background: #fff;
+			border: 1px solid var(--line);
+			border-radius: 10px;
+			align-items: center;
+			font-size: 13px;
+		}
+
+		.demo-card .action-row .check {
+			width: 22px;
+			height: 22px;
+			border-radius: 6px;
+			background: var(--green);
+			color: #fff;
+			display: grid;
+			place-items: center;
+			font-weight: 700;
+			font-size: 13px;
+		}
+
+		.demo-card .action-row .who {
+			font-family: var(--font-mono);
+			font-size: 11px;
+			color: var(--ink-2);
+			letter-spacing: .04em;
+		}
+
+		.demo-card .action-row .due {
+			font-family: var(--font-mono);
+			font-size: 11px;
+			color: var(--green);
+			font-weight: 700;
+		}
+
+		.demo-card .action-row .task {
+			color: var(--ink);
+			font-weight: 500;
+		}
+
+		/* ============================================================ */
+		/* ITERATION LOOP                                                 */
+		/* ============================================================ */
+		.iter-grid {
+			display: grid;
+			grid-template-columns: repeat(4, 1fr);
+			gap: 18px;
+			margin-top: 40px;
+		}
+
+		.iter-step {
+			padding: 26px;
+			background: var(--paper);
+			border-radius: 18px;
+			border: 1px solid var(--line);
+			position: relative;
+		}
+
+		.iter-step::before {
+			content: "";
+			position: absolute;
+			top: 50%;
+			right: -16px;
+			width: 28px;
+			height: 2px;
+			background: var(--ink-3);
+			transform: translateY(-50%);
+			z-index: 2;
+		}
+
+		.iter-step::after {
+			content: "";
+			position: absolute;
+			top: 50%;
+			right: -22px;
+			border: 6px solid transparent;
+			border-left-color: var(--ink-3);
+			transform: translateY(-50%);
+			z-index: 2;
+		}
+
+		.iter-step:last-child::before,
+		.iter-step:last-child::after {
+			display: none
+		}
+
+		.iter-step .n {
+			font-family: var(--font-mono);
+			font-size: 12px;
+			color: var(--blue);
+			letter-spacing: .12em;
+			margin-bottom: 12px;
+			font-weight: 700;
+		}
+
+		.iter-step h4 {
+			font-size: 19px;
+			font-weight: 600;
+			color: var(--ink);
+			margin-bottom: 10px;
+			letter-spacing: -.01em;
+		}
+
+		.iter-step p {
+			font-size: 13.5px;
+			color: var(--ink-2);
+			line-height: 1.5;
+			margin-bottom: 12px;
+		}
+
+		.iter-step .quote {
+			padding: 10px 14px;
+			background: var(--ink);
+			color: #fff;
+			border-radius: 8px;
+			font-family: var(--font-mono);
+			font-size: 12px;
+			line-height: 1.5;
+		}
+
+		.iter-step .quote::before {
+			content: "» ";
+			color: var(--green);
+			font-weight: 700;
+		}
+
+		/* ============================================================ */
+		/* MEMORY FEATURE                                                 */
+		/* ============================================================ */
+		.memo {
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			gap: 18px;
+			margin-top: 22px;
+		}
+
+		.memo-card {
+			padding: 22px 24px;
+			border-radius: 20px;
+			border: 1px solid var(--line);
+			background: var(--white);
+			position: relative;
+			overflow: hidden;
+			display: flex;
+			flex-direction: column;
+			gap: 12px;
+		}
+
+		.memo-card .brand-pill {
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			padding: 6px 12px;
+			border-radius: 999px;
+			font-size: 12px;
+			font-weight: 700;
+			letter-spacing: .04em;
+			width: fit-content;
+		}
+
+		.memo-card.claude .brand-pill {
+			background: #FEEFE2;
+			color: #C25E1A
+		}
+
+		.memo-card.gpt .brand-pill {
+			background: #DCF7E5;
+			color: #0E6E2C
+		}
+
+		.memo-card.gemini .brand-pill {
+			background: var(--blue-mist);
+			color: var(--blue-dark)
+		}
+
+		.memo-card h4 {
+			font-size: 20px;
+			font-weight: 700;
+			color: var(--ink);
+			letter-spacing: -.02em;
+		}
+
+		.memo-card .feat {
+			font-size: 12.5px;
+			color: var(--ink-2);
+			line-height: 1.45;
+		}
+
+		.memo-card .saved {
+			margin-top: auto;
+			padding: 12px 14px;
+			background: var(--paper);
+			border-radius: 10px;
+			border: 1px dashed var(--line);
+			font-size: 12px;
+			line-height: 1.45;
+		}
+
+		.memo-card .saved .lab {
+			font-family: var(--font-mono);
+			font-size: 10px;
+			letter-spacing: .14em;
+			color: var(--ink-3);
+			margin-bottom: 4px;
+		}
+
+		.memo-card .saved .item {
+			padding: 4px 0;
+			color: var(--ink);
+			border-bottom: 1px solid var(--line-2);
+			display: flex;
+			gap: 8px;
+			align-items: flex-start;
+		}
+
+		.memo-card .saved .item:last-child {
+			border-bottom: none
+		}
+
+		.memo-card .saved .item::before {
+			content: "✓";
+			color: var(--green);
+			font-weight: 700;
+			margin-top: 1px;
+		}
+
+		.memo-headline {
+			padding: 16px 24px;
+			margin-top: 18px;
+			background: var(--ink);
+			color: #fff;
+			border-radius: 14px;
+			display: grid;
+			grid-template-columns: 1fr auto;
+			gap: 28px;
+			align-items: center;
+		}
+
+		.memo-headline h5 {
+			font-size: 17px;
+			font-weight: 600;
+			color: #fff;
+			margin-bottom: 3px;
+		}
+
+		.memo-headline p {
+			font-size: 13px;
+			color: rgba(255, 255, 255, .7);
+			line-height: 1.45;
+		}
+
+		.memo-headline .save-mockup {
+			padding: 10px 14px;
+			background: rgba(0, 166, 81, .15);
+			border: 1px solid rgba(0, 166, 81, .35);
+			border-radius: 10px;
+			font-family: var(--font-mono);
+			font-size: 12px;
+			color: #34D870;
+		}
+
+		.memo-headline .save-mockup::before {
+			content: "✓ ";
+			color: #34D870;
+			font-weight: 700;
+		}
+
+		/* ============================================================ */
+		/* FILES / ATTACHMENTS                                            */
+		/* ============================================================ */
+		.attach-flow {
+			display: grid;
+			grid-template-columns: 1fr 80px 1fr;
+			gap: 24px;
+			margin-top: 36px;
+			align-items: center;
+		}
+
+		.attach-tiles {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 14px;
+		}
+
+		.attach-tile {
+			padding: 22px;
+			background: var(--paper);
+			border: 1px solid var(--line);
+			border-radius: 16px;
+			display: flex;
+			flex-direction: column;
+			gap: 10px;
 			transition: all .3s var(--ease);
 		}
 
-		.task-card:hover {
+		.attach-tile:hover {
+			background: var(--blue-mist);
+			border-color: var(--blue);
+			transform: translateY(-2px);
+		}
+
+		.attach-tile .ftype {
+			font-family: var(--font-mono);
+			font-size: 11px;
+			letter-spacing: .12em;
+			color: var(--blue);
+			font-weight: 700;
+		}
+
+		.attach-tile h5 {
+			font-size: 16px;
+			font-weight: 600;
+			color: var(--ink);
+			letter-spacing: -.01em;
+		}
+
+		.attach-tile p {
+			font-size: 13px;
+			color: var(--ink-2);
+			line-height: 1.5;
+		}
+
+		.attach-result {
+			padding: 26px;
+			background: var(--ink);
+			color: #fff;
+			border-radius: 18px;
+			min-height: 280px;
+			display: flex;
+			flex-direction: column;
+			gap: 16px;
+			position: relative;
+			overflow: hidden;
+		}
+
+		.attach-result::before {
+			content: "";
+			position: absolute;
+			inset: 0;
+			background: radial-gradient(ellipse at top right, rgba(0, 102, 255, .25), transparent 50%);
+		}
+
+		.attach-result .lbl {
+			position: relative;
+			font-family: var(--font-mono);
+			font-size: 11px;
+			letter-spacing: .14em;
+			color: rgba(255, 255, 255, .55);
+		}
+
+		.attach-result h4 {
+			position: relative;
+			font-size: 22px;
+			font-weight: 600;
+			letter-spacing: -.01em;
+			line-height: 1.25;
+		}
+
+		.attach-result ul {
+			position: relative;
+			list-style: none;
+			padding: 0;
+			margin: 0;
+			display: flex;
+			flex-direction: column;
+			gap: 10px;
+		}
+
+		.attach-result ul li {
+			display: grid;
+			grid-template-columns: 22px 1fr;
+			gap: 10px;
+			align-items: start;
+			font-size: 13.5px;
+			color: rgba(255, 255, 255, .85);
+			line-height: 1.45;
+		}
+
+		.attach-result ul li::before {
+			content: "✓";
+			color: #34D870;
+			font-weight: 700;
+			background: rgba(0, 166, 81, .15);
+			border-radius: 6px;
+			width: 22px;
+			height: 22px;
+			display: grid;
+			place-items: center;
+			font-size: 12px;
+		}
+
+		/* ============================================================ */
+		/* REASONING — fast vs thinking                                   */
+		/* ============================================================ */
+		.reason-grid {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 22px;
+			margin-top: 32px;
+		}
+
+		.reason-card {
+			padding: 32px;
+			border-radius: 22px;
+			border: 1px solid var(--line);
+			position: relative;
+			overflow: hidden;
+		}
+
+		.reason-card.fast {
+			background: linear-gradient(180deg, var(--green-mist), #FFFFFF);
+			border-color: #BBF0CC;
+		}
+
+		.reason-card.deep {
+			background: linear-gradient(180deg, #F5F0FF, #FFFFFF);
+			border-color: #C9B6F5;
+		}
+
+		.reason-card .icon {
+			width: 56px;
+			height: 56px;
+			border-radius: 14px;
+			background: #fff;
+			display: grid;
+			place-items: center;
+			margin-bottom: 16px;
+			font-size: 26px;
+		}
+
+		.reason-card.fast .icon {
+			color: var(--green)
+		}
+
+		.reason-card.deep .icon {
+			color: var(--violet)
+		}
+
+		.reason-card .pill {
+			display: inline-block;
+			padding: 4px 12px;
+			border-radius: 999px;
+			font-size: 11px;
+			font-weight: 700;
+			letter-spacing: .12em;
+			text-transform: uppercase;
+			margin-bottom: 12px;
+		}
+
+		.reason-card.fast .pill {
+			background: var(--green);
+			color: #fff
+		}
+
+		.reason-card.deep .pill {
+			background: var(--violet);
+			color: #fff
+		}
+
+		.reason-card h3 {
+			font-size: 28px;
+			font-weight: 700;
+			color: var(--ink);
+			letter-spacing: -.02em;
+			margin-bottom: 8px;
+		}
+
+		.reason-card .sub {
+			font-size: 14px;
+			color: var(--ink-2);
+			margin-bottom: 18px;
+			line-height: 1.5;
+		}
+
+		.reason-card .ex-list {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+			display: flex;
+			flex-direction: column;
+			gap: 8px;
+		}
+
+		.reason-card .ex-list li {
+			padding: 10px 14px;
+			background: rgba(255, 255, 255, .7);
+			border: 1px solid rgba(0, 0, 0, .04);
+			border-radius: 10px;
+			font-size: 13.5px;
+			color: var(--ink);
+			line-height: 1.4;
+		}
+
+		.reason-card .models {
+			margin-top: 16px;
+			padding-top: 14px;
+			border-top: 1px dashed rgba(0, 0, 0, .1);
+			display: flex;
+			gap: 8px;
+			flex-wrap: wrap;
+		}
+
+		.reason-card .models .chip {
+			padding: 4px 10px;
+			background: rgba(0, 0, 0, .05);
+			border-radius: 6px;
+			font-family: var(--font-mono);
+			font-size: 11px;
+			font-weight: 600;
+			color: var(--ink);
+		}
+
+		/* ============================================================ */
+		/* PROMPT LIBRARY                                                 */
+		/* ============================================================ */
+		.lib-grid {
+			display: grid;
+			grid-template-columns: repeat(2, 1fr);
+			gap: 18px;
+			margin-top: 32px;
+		}
+
+		.lib-card {
+			padding: 22px 24px;
+			background: var(--white);
+			border: 1px solid var(--line);
+			border-radius: 16px;
+			transition: all .3s var(--ease);
+			display: flex;
+			flex-direction: column;
+			gap: 12px;
+		}
+
+		.lib-card:hover {
 			border-color: var(--green);
 			background: var(--green-mist);
 			transform: translateY(-2px);
 		}
 
-		.task-card .label {
-			font-size: 12px;
-			letter-spacing: .14em;
-			text-transform: uppercase;
-			color: var(--green);
-			font-weight: 700;
-			margin-bottom: 8px;
-		}
-
-		.task-card h4 {
-			font-size: 19px;
-			font-weight: 600;
-			margin-bottom: 6px;
-			color: var(--ink);
-		}
-
-		.task-card p {
-			font-size: 14px;
-			color: var(--ink-2);
-			line-height: 1.45;
-		}
-
-		.task-card code {
-			font-family: var(--font-mono);
-			font-size: 13px;
-			background: var(--white);
-			padding: 4px 8px;
-			border-radius: 6px;
-			border: 1px solid var(--line);
-			color: var(--ink);
-		}
-
-		/* ============================================================ */
-		/* ============ SLIDE — WHY DIFFERENT ANSWERS ================= */
-		/* ============================================================ */
-		.why-grid {
-			display: grid;
-			grid-template-columns: 1fr 1fr 1fr;
-			gap: 24px;
-			margin-top: 56px;
-		}
-
-		.why-card {
-			padding: 32px;
-			background: var(--paper);
-			border-radius: 20px;
-			border: 1px solid var(--line);
-			position: relative;
-			overflow: hidden;
-		}
-
-		.why-card .n {
-			font-family: var(--font-mono);
-			font-size: 12px;
-			letter-spacing: .1em;
-			color: var(--ink-3);
-			margin-bottom: 20px;
-		}
-
-		.why-card .t {
-			font-size: 22px;
-			font-weight: 600;
-			color: var(--ink);
-			line-height: 1.2;
-			margin-bottom: 14px;
-		}
-
-		.why-card .d {
-			font-size: 14px;
-			color: var(--ink-2);
-			line-height: 1.55;
-		}
-
-		/* ============================================================ */
-		/* ============ PARROT SLIDE =================================== */
-		/* ============================================================ */
-		.parrot {
-			display: grid;
-			grid-template-columns: 1fr 1.2fr;
-			gap: 50px;
-			align-items: center;
-		}
-
-		.parrot> :first-child {
-			align-self: start;
-		}
-
-		.parrot-art {
-			position: relative;
-			aspect-ratio: 1;
-			height: min(70vh, 864px);
-			width: auto;
-			margin-left: auto;
-		}
-
-		.parrot-art svg {
-			width: 100%;
-			height: auto;
-		}
-
-		/* ============================================================ */
-		/* ============ BEST EMPLOYEE SLIDE ============================ */
-		/* ============================================================ */
-		.best {
-			background:
-				radial-gradient(ellipse at 20% 80%, rgba(0, 166, 81, .12) 0%, transparent 50%),
-				linear-gradient(180deg, #FFFFFF 0%, #F7F8FA 100%);
-			justify-content: center;
-			text-align: center;
-		}
-
-		.best .quote-mark {
-			font-family: "Georgia", serif;
-			font-size: 200px;
-			line-height: 0.6;
-			color: var(--green);
-			opacity: .25;
-			margin-bottom: 24px;
-		}
-
-		.best h1 {
-			font-size: clamp(48px, 5.6vw, 96px);
-			font-weight: 700;
-			line-height: 1;
-			letter-spacing: -.03em;
-			max-width: 22ch;
-			color: var(--ink);
-		}
-
-		.best h1 .hl {
-			background: linear-gradient(135deg, var(--green) 0%, var(--blue) 100%);
-			-webkit-background-clip: text;
-			background-clip: text;
-			color: transparent;
-		}
-
-		.best .caption {
-			margin-top: 32px;
-			font-size: 18px;
-			color: var(--ink-2);
-			max-width: 60ch;
-		}
-
-		/* ============================================================ */
-		/* ============ CASE STUDY — SARDOBA =========================== */
-		/* ============================================================ */
-		.case-intro {
-			display: grid;
-			grid-template-columns: 1.1fr 1fr;
-			gap: 80px;
-			align-items: center;
-		}
-
-		.xl-download {
-			display: inline-flex;
-			align-items: center;
-			gap: 12px;
-			margin-top: 22px;
-			padding: 12px 18px;
-			background: #1D6F42;
-			color: #fff;
-			border-radius: 12px;
-			font-weight: 600;
-			font-size: 14px;
-			text-decoration: none;
-			box-shadow: 0 4px 14px -4px rgba(29, 111, 66, .45);
-			transition: transform .2s var(--ease), box-shadow .2s var(--ease);
-		}
-
-		.xl-download:hover {
-			transform: translateY(-1px);
-			box-shadow: 0 8px 20px -4px rgba(29, 111, 66, .5);
-		}
-
-		.xl-download .xl-icon {
-			width: 26px;
-			height: 26px;
-			border-radius: 6px;
-			background: #fff;
-			color: #1D6F42;
-			display: grid;
-			place-items: center;
-			font-family: var(--font-mono);
-			font-size: 11px;
-			font-weight: 700;
-			letter-spacing: -.02em;
-		}
-
-		.xl-download .xl-file {
-			font-family: var(--font-mono);
-			font-size: 13px;
-			color: rgba(255, 255, 255, .85);
-		}
-
-		.data-panel {
-			background: var(--ink);
-			border-radius: 22px;
-			padding: 40px;
-			color: #fff;
-			position: relative;
-			overflow: hidden;
-		}
-
-		.data-panel::before {
-			content: "";
-			position: absolute;
-			inset: 0;
-			background:
-				radial-gradient(ellipse at top right, rgba(0, 102, 255, .2) 0%, transparent 50%);
-		}
-
-		.data-panel .dp-head {
+		.lib-card .head {
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
-			margin-bottom: 32px;
-			position: relative;
+			gap: 12px;
 		}
 
-		.data-panel .dp-title {
-			font-size: 14px;
-			color: rgba(255, 255, 255, .6);
-			letter-spacing: .1em;
-			text-transform: uppercase;
-			font-weight: 500;
-		}
-
-		.data-panel .dp-badge {
-			padding: 4px 12px;
-			background: rgba(0, 166, 81, .2);
-			color: #34D870;
-			border-radius: 6px;
-			font-size: 12px;
-			font-weight: 600;
-			font-family: var(--font-mono);
-		}
-
-		.stat-row {
-			display: grid;
-			grid-template-columns: 1fr 1fr;
-			gap: 24px;
-			margin-bottom: 32px;
-			position: relative;
-		}
-
-		.stat-row .s {
-			padding: 20px;
-			background: rgba(255, 255, 255, .04);
-			border: 1px solid rgba(255, 255, 255, .08);
-			border-radius: 12px;
-		}
-
-		.stat-row .s .lbl {
-			font-size: 12px;
-			color: rgba(255, 255, 255, .5);
-			letter-spacing: .05em;
-			text-transform: uppercase;
-			margin-bottom: 8px;
-		}
-
-		.stat-row .s .num {
-			font-size: 36px;
-			font-weight: 700;
-			letter-spacing: -.02em;
-			color: #fff;
-			font-variant-numeric: tabular-nums;
-		}
-
-		.stat-row .s .hint {
-			margin-top: 4px;
-			font-size: 13px;
-			color: rgba(255, 255, 255, .6);
-		}
-
-		.bar-viz {
-			position: relative;
-			margin-top: 8px;
-		}
-
-		.bar-viz .br-row {
-			display: grid;
-			grid-template-columns: 100px 1fr 60px;
-			gap: 14px;
-			align-items: center;
-			margin-bottom: 12px;
-			font-size: 13px;
-		}
-
-		.bar-viz .br-row .c {
-			color: rgba(255, 255, 255, .75);
-		}
-
-		.bar-viz .br-row .b {
-			height: 10px;
-			background: rgba(255, 255, 255, .08);
-			border-radius: 999px;
-			overflow: hidden;
-			position: relative;
-		}
-
-		.bar-viz .br-row .b .fill {
-			height: 100%;
-			border-radius: 999px;
-			background: linear-gradient(90deg, var(--green), #34D870);
-			transition: width 1.2s var(--ease) 0.4s;
-			width: 0;
-		}
-
-		.bar-viz .br-row .v {
-			text-align: right;
-			color: #fff;
-			font-weight: 600;
-			font-family: var(--font-mono);
-		}
-
-		.slide.active .bar-viz .br-row .b .fill {
-			width: var(--w)
-		}
-
-		/* ============================================================ */
-		/* ============ CLAUDE CHAT MOCK ============================== */
-		/* ============================================================ */
-		.chat-mock {
-			background: var(--paper);
-			border-radius: 22px;
-			border: 1px solid var(--line);
-			padding: 0;
-			overflow: hidden;
-			box-shadow: 0 20px 60px -20px rgba(0, 0, 0, .08);
-		}
-
-		.chat-mock .bar {
-			display: flex;
-			align-items: center;
-			gap: 8px;
-			padding: 14px 20px;
-			background: var(--white);
-			border-bottom: 1px solid var(--line);
-		}
-
-		.chat-mock .bar .dot {
-			width: 12px;
-			height: 12px;
-			border-radius: 50%;
-			background: var(--ink-3);
-			opacity: .3;
-		}
-
-		.chat-mock .bar .dot:nth-child(1) {
-			background: #FF5F57
-		}
-
-		.chat-mock .bar .dot:nth-child(2) {
-			background: #FFBD2E
-		}
-
-		.chat-mock .bar .dot:nth-child(3) {
-			background: #28CA42
-		}
-
-		.chat-mock .bar .url {
-			margin-left: 12px;
-			font-family: var(--font-mono);
-			font-size: 12px;
-			color: var(--ink-2);
-		}
-
-		.chat-mock .body {
-			padding: 28px;
-			display: flex;
-			flex-direction: column;
-			gap: 16px;
-			max-height: 520px;
-			overflow: hidden;
-		}
-
-		.msg {
-			max-width: 86%;
-			padding: 14px 18px;
-			border-radius: 14px;
-			font-size: 15px;
-			line-height: 1.5;
-		}
-
-		.msg.u {
-			align-self: flex-end;
-			background: var(--green);
-			color: #fff;
-			border-bottom-right-radius: 4px;
-		}
-
-		.msg.a {
-			align-self: flex-start;
-			background: #fff;
-			border: 1px solid var(--line);
-			color: var(--ink);
-			border-bottom-left-radius: 4px;
-		}
-
-		.msg .typing {
-			display: inline-flex;
-			gap: 4px;
-		}
-
-		.msg .typing i {
-			width: 6px;
-			height: 6px;
-			border-radius: 50%;
-			background: var(--ink-3);
-			animation: typing 1.4s infinite;
-		}
-
-		.msg .typing i:nth-child(2) {
-			animation-delay: .2s
-		}
-
-		.msg .typing i:nth-child(3) {
-			animation-delay: .4s
-		}
-
-		@keyframes typing {
-
-			0%,
-			60%,
-			100% {
-				transform: translateY(0);
-				opacity: .3
-			}
-
-			30% {
-				transform: translateY(-6px);
-				opacity: 1
-			}
-		}
-
-		/* ============================================================ */
-		/* ============ USE CASES 5-GRID =============================== */
-		/* ============================================================ */
-		.uc-grid {
-			display: grid;
-			grid-template-columns: repeat(5, 1fr);
-			gap: 20px;
-			margin-top: 56px;
-		}
-
-		.uc-card {
-			padding: 32px 28px;
-			background: var(--paper);
-			border: 1px solid var(--line);
-			border-radius: 20px;
-			transition: all .3s var(--ease);
-			cursor: default;
-			display: flex;
-			flex-direction: column;
-			min-height: 320px;
-		}
-
-		.uc-card:hover {
-			background: var(--green-mist);
-			border-color: var(--green);
-			transform: translateY(-4px);
-			box-shadow: 0 20px 40px -20px rgba(0, 166, 81, .2);
-		}
-
-		.uc-card .icon {
-			width: 56px;
-			height: 56px;
-			border-radius: 14px;
-			background: var(--white);
-			display: grid;
-			place-items: center;
-			margin-bottom: 24px;
-			color: var(--green);
-		}
-
-		.uc-card .uc-n {
+		.lib-card .head .num {
 			font-family: var(--font-mono);
 			font-size: 11px;
 			color: var(--ink-3);
-			letter-spacing: .1em;
-			margin-bottom: 10px;
+			letter-spacing: .12em;
 		}
 
-		.uc-card h4 {
-			font-size: 20px;
-			font-weight: 600;
-			color: var(--ink);
-			line-height: 1.2;
-			margin-bottom: 12px;
-		}
-
-		.uc-card p {
-			font-size: 14px;
-			color: var(--ink-2);
-			line-height: 1.5;
-			margin-top: auto;
-		}
-
-		/* ============================================================ */
-		/* ============ 3 RULES SLIDE ================================= */
-		/* ============================================================ */
-		.rules {
-			display: grid;
-			grid-template-columns: 1fr 1fr 1fr;
-			gap: 20px;
-			margin-top: 28px;
-		}
-
-		.rule-card {
-			padding: 26px 26px 22px;
-			background: linear-gradient(180deg, var(--white), var(--paper));
-			border-radius: 20px;
-			border: 1px solid var(--line);
-			position: relative;
-			overflow: hidden;
-		}
-
-		.rule-card .rn {
-			font-size: 56px;
+		.lib-card .head h5 {
+			font-size: 17px;
 			font-weight: 700;
-			color: var(--green);
-			line-height: 1;
-			letter-spacing: -.04em;
-			font-feature-settings: "tnum";
-			margin-bottom: 8px;
-			background: linear-gradient(135deg, var(--green), var(--blue));
-			-webkit-background-clip: text;
-			background-clip: text;
-			color: transparent;
-			display: block;
-		}
-
-		.rule-card h4 {
-			font-size: 20px;
-			font-weight: 600;
 			color: var(--ink);
-			margin-bottom: 8px;
 			letter-spacing: -.01em;
 		}
 
-		.rule-card p {
-			font-size: 14px;
+		.lib-card .copy-btn {
+			padding: 4px 10px;
+			background: var(--paper);
+			border: 1px solid var(--line);
+			border-radius: 8px;
+			font-family: var(--font-mono);
+			font-size: 11px;
 			color: var(--ink-2);
-			line-height: 1.45;
+			letter-spacing: .04em;
 		}
 
-		.rule-card .ex {
-			margin-top: 12px;
-			padding: 10px 14px;
-			background: var(--ink);
-			color: rgba(255, 255, 255, .9);
+		.lib-card .pmt {
+			padding: 14px 16px;
+			background: var(--paper);
 			border-radius: 10px;
 			font-family: var(--font-mono);
-			font-size: 11.5px;
-			line-height: 1.45;
+			font-size: 12px;
+			color: var(--ink);
+			line-height: 1.55;
+			border: 1px solid var(--line);
 		}
 
-		.rule-card .ex .tag {
-			color: #34D870;
+		.lib-card .pmt .var {
+			background: var(--blue);
+			color: #fff;
+			padding: 1px 6px;
+			border-radius: 4px;
 			font-weight: 600;
 		}
 
 		/* ============================================================ */
-		/* ============ RED FLAGS ===================================== */
+		/* MISTAKES                                                       */
 		/* ============================================================ */
 		.flags {
 			display: grid;
 			grid-template-columns: 1fr 1fr;
-			gap: 20px;
-			margin-top: 48px;
+			gap: 18px;
+			margin-top: 32px;
 		}
 
 		.flag {
-			padding: 28px 32px;
+			padding: 24px 28px;
 			border-radius: 18px;
 			display: grid;
-			grid-template-columns: 56px 1fr;
-			gap: 24px;
+			grid-template-columns: 50px 1fr;
+			gap: 22px;
 			align-items: start;
 		}
 
 		.flag.no {
 			background: #FEF2F2;
-			border: 1px solid #FECACA;
+			border: 1px solid #FECACA
 		}
 
 		.flag.yes {
 			background: var(--green-mist);
-			border: 1px solid #BBF0CC;
+			border: 1px solid #BBF0CC
 		}
 
 		.flag .ic {
-			width: 56px;
-			height: 56px;
-			border-radius: 14px;
+			width: 50px;
+			height: 50px;
+			border-radius: 12px;
 			display: grid;
 			place-items: center;
-			font-size: 24px;
+			font-size: 22px;
 			font-weight: 700;
 		}
 
@@ -1572,62 +1926,495 @@
 		}
 
 		.flag h5 {
-			font-size: 18px;
+			font-size: 17px;
 			font-weight: 600;
 			color: var(--ink);
 			margin-bottom: 6px;
+			letter-spacing: -.01em;
 		}
 
 		.flag p {
-			font-size: 14px;
+			font-size: 13.5px;
 			color: var(--ink-2);
 			line-height: 1.5;
 		}
 
 		/* ============================================================ */
-		/* ============ CHALLENGE SLIDE =============================== */
+		/* TOOLS                                                          */
 		/* ============================================================ */
-		.challenge {
-			background:
-				radial-gradient(ellipse at 20% 20%, rgba(0, 102, 255, .08) 0%, transparent 50%),
-				radial-gradient(ellipse at 80% 80%, rgba(0, 166, 81, .1) 0%, transparent 50%),
-				var(--white);
-		}
-
-		.cal-grid {
+		.tools-grid {
 			display: grid;
-			grid-template-columns: repeat(10, 1fr);
-			gap: 8px;
-			margin-top: 40px;
-			max-width: 900px;
+			grid-template-columns: repeat(3, 1fr);
+			gap: 22px;
+			margin-top: 36px;
 		}
 
-		.cal-day {
-			aspect-ratio: 1;
-			border-radius: 8px;
-			background: var(--paper);
+		.tool-card {
+			padding: 32px 28px;
+			border-radius: 22px;
 			border: 1px solid var(--line);
+			background: var(--white);
+			display: flex;
+			flex-direction: column;
+			gap: 16px;
+			min-height: 420px;
+			position: relative;
+			overflow: hidden;
+		}
+
+		.tool-card.featured {
+			background: linear-gradient(180deg, #FFFFFF, var(--green-mist));
+			border-color: var(--green);
+			box-shadow: 0 16px 40px -16px rgba(0, 166, 81, .25);
+		}
+
+		.tool-card .award {
+			position: absolute;
+			top: 18px;
+			right: 18px;
+			padding: 4px 10px;
+			background: var(--green);
+			color: #fff;
+			border-radius: 999px;
+			font-size: 10px;
+			font-weight: 700;
+			letter-spacing: .12em;
+		}
+
+		.tool-card .name {
+			font-size: 26px;
+			font-weight: 700;
+			letter-spacing: -.02em;
+			color: var(--ink);
+		}
+
+		.tool-card .price {
+			font-family: var(--font-mono);
+			font-size: 13px;
+			color: var(--ink-2);
+			margin-top: -10px;
+		}
+
+		.tool-card .pros {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+			display: flex;
+			flex-direction: column;
+			gap: 10px;
+			flex: 1;
+		}
+
+		.tool-card .pros li {
+			display: grid;
+			grid-template-columns: 20px 1fr;
+			gap: 10px;
+			align-items: start;
+			font-size: 13.5px;
+			color: var(--ink);
+			line-height: 1.45;
+		}
+
+		.tool-card .pros li::before {
+			content: "✓";
+			color: var(--green);
+			font-weight: 700;
+		}
+
+		.tool-card .best-for {
+			padding: 14px;
+			background: var(--paper);
+			border-radius: 12px;
+			border: 1px dashed var(--line);
+		}
+
+		.tool-card.featured .best-for {
+			background: rgba(255, 255, 255, .8);
+			border-color: rgba(0, 166, 81, .3);
+		}
+
+		.tool-card .best-for .lab {
+			font-family: var(--font-mono);
+			font-size: 10px;
+			letter-spacing: .14em;
+			color: var(--ink-3);
+			margin-bottom: 4px;
+		}
+
+		.tool-card .best-for .v {
+			font-size: 14px;
+			font-weight: 600;
+			color: var(--ink);
+		}
+
+		/* ============================================================ */
+		/* PRACTICAL TURN — group exercise                                */
+		/* ============================================================ */
+		.exercise {
+			display: grid;
+			grid-template-columns: 1.3fr 1fr;
+			gap: 56px;
+			align-items: center;
+		}
+
+		.ex-card {
+			padding: 32px 36px;
+			background: var(--ink);
+			color: #fff;
+			border-radius: 22px;
+			position: relative;
+			overflow: hidden;
+		}
+
+		.ex-card::before {
+			content: "";
+			position: absolute;
+			inset: 0;
+			background: radial-gradient(ellipse at top left, rgba(0, 166, 81, .25), transparent 60%);
+			pointer-events: none;
+		}
+
+		.ex-card .timer {
+			position: absolute;
+			top: 28px;
+			right: 28px;
+			padding: 6px 14px;
+			background: rgba(0, 166, 81, .15);
+			border: 1px solid rgba(0, 166, 81, .35);
+			border-radius: 999px;
+			font-family: var(--font-mono);
+			font-size: 13px;
+			color: #34D870;
+			font-weight: 700;
+		}
+
+		.ex-card .step {
+			position: relative;
+			display: grid;
+			grid-template-columns: 32px 1fr;
+			gap: 14px;
+			padding: 14px 0;
+			border-bottom: 1px solid rgba(255, 255, 255, .08);
+		}
+
+		.ex-card .step:last-child {
+			border-bottom: none
+		}
+
+		.ex-card .step .n {
+			width: 28px;
+			height: 28px;
+			border-radius: 8px;
+			background: rgba(0, 166, 81, .2);
+			color: #34D870;
 			display: grid;
 			place-items: center;
 			font-family: var(--font-mono);
-			font-size: 13px;
-			font-weight: 500;
-			color: var(--ink-2);
-			transition: all .3s var(--ease) calc(var(--i) * 30ms);
+			font-size: 12px;
+			font-weight: 700;
 		}
 
-		.slide.active .cal-day {
-			background: var(--green);
-			border-color: var(--green);
+		.ex-card .step h5 {
+			font-size: 17px;
+			font-weight: 600;
+			color: #fff;
+			margin-bottom: 4px;
+		}
+
+		.ex-card .step p {
+			font-size: 13.5px;
+			color: rgba(255, 255, 255, .65);
+			line-height: 1.5;
+		}
+
+		.ex-card .label {
+			position: relative;
+			font-family: var(--font-mono);
+			font-size: 11px;
+			letter-spacing: .14em;
+			color: rgba(255, 255, 255, .55);
+			margin-bottom: 12px;
+		}
+
+		.ex-card h3 {
+			position: relative;
+			font-size: 30px;
+			font-weight: 700;
+			letter-spacing: -.02em;
+			margin-bottom: 22px;
 			color: #fff;
 		}
 
-		.cal-day:nth-child(5n) {
-			transform: rotate(0)
+		/* ============================================================ */
+		/* HOMEWORK — 5-day plan                                          */
+		/* ============================================================ */
+		.hw-row {
+			display: grid;
+			grid-template-columns: repeat(5, 1fr);
+			gap: 12px;
+			margin-top: 36px;
+		}
+
+		.hw-day {
+			padding: 22px;
+			background: var(--paper);
+			border: 1px solid var(--line);
+			border-radius: 16px;
+			display: flex;
+			flex-direction: column;
+			gap: 10px;
+			min-height: 240px;
+			position: relative;
+		}
+
+		.hw-day .day-label {
+			font-family: var(--font-mono);
+			font-size: 11px;
+			color: var(--blue);
+			font-weight: 700;
+			letter-spacing: .12em;
+		}
+
+		.hw-day .day-n {
+			font-size: 36px;
+			font-weight: 700;
+			color: var(--ink);
+			line-height: 1;
+			letter-spacing: -.04em;
+			background: linear-gradient(135deg, var(--green), var(--blue));
+			-webkit-background-clip: text;
+			background-clip: text;
+			color: transparent;
+		}
+
+		.hw-day h5 {
+			font-size: 15px;
+			font-weight: 600;
+			color: var(--ink);
+			letter-spacing: -.01em;
+			margin-top: 4px;
+		}
+
+		.hw-day p {
+			font-size: 12.5px;
+			color: var(--ink-2);
+			line-height: 1.45;
+			margin-top: auto;
+		}
+
+		.hw-day .reward {
+			margin-top: 10px;
+			padding: 6px 10px;
+			background: var(--green);
+			color: #fff;
+			border-radius: 8px;
+			font-family: var(--font-mono);
+			font-size: 11px;
+			font-weight: 700;
+			width: fit-content;
 		}
 
 		/* ============================================================ */
-		/* ============ Q&A SLIDE ===================================== */
+		/* LEADERBOARD                                                    */
+		/* ============================================================ */
+		.leader {
+			display: grid;
+			grid-template-columns: 1.1fr 1fr;
+			gap: 56px;
+			align-items: center;
+			margin-top: 16px;
+		}
+
+		.leader-board {
+			background: var(--ink);
+			color: #fff;
+			border-radius: 22px;
+			padding: 32px;
+			position: relative;
+			overflow: hidden;
+		}
+
+		.leader-board::before {
+			content: "";
+			position: absolute;
+			top: -30%;
+			left: -20%;
+			width: 400px;
+			height: 400px;
+			background: radial-gradient(circle, rgba(245, 166, 35, .25) 0%, transparent 70%);
+			filter: blur(40px);
+		}
+
+		.leader-board .lh {
+			position: relative;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-bottom: 20px;
+		}
+
+		.leader-board .lh h4 {
+			font-size: 18px;
+			font-weight: 600;
+			color: #fff;
+		}
+
+		.leader-board .lh .live {
+			font-family: var(--font-mono);
+			font-size: 11px;
+			color: #34D870;
+			letter-spacing: .12em;
+		}
+
+		.leader-row {
+			position: relative;
+			display: grid;
+			grid-template-columns: 36px 1fr auto;
+			gap: 14px;
+			padding: 12px 14px;
+			background: rgba(255, 255, 255, .04);
+			border: 1px solid rgba(255, 255, 255, .06);
+			border-radius: 10px;
+			margin-bottom: 8px;
+			align-items: center;
+		}
+
+		.leader-row.gold {
+			background: linear-gradient(90deg, rgba(245, 166, 35, .25), rgba(245, 166, 35, .05));
+			border-color: rgba(245, 166, 35, .3);
+		}
+
+		.leader-row.silver {
+			background: linear-gradient(90deg, rgba(192, 192, 192, .15), transparent);
+			border-color: rgba(192, 192, 192, .2);
+		}
+
+		.leader-row.bronze {
+			background: linear-gradient(90deg, rgba(205, 127, 50, .15), transparent);
+			border-color: rgba(205, 127, 50, .2);
+		}
+
+		.leader-row .rank {
+			width: 28px;
+			height: 28px;
+			border-radius: 8px;
+			background: rgba(255, 255, 255, .08);
+			color: rgba(255, 255, 255, .6);
+			display: grid;
+			place-items: center;
+			font-family: var(--font-mono);
+			font-size: 12px;
+			font-weight: 700;
+		}
+
+		.leader-row.gold .rank {
+			background: var(--gold);
+			color: #fff
+		}
+
+		.leader-row.silver .rank {
+			background: #C0C0C0;
+			color: #333
+		}
+
+		.leader-row.bronze .rank {
+			background: #CD7F32;
+			color: #fff
+		}
+
+		.leader-row .who {
+			font-size: 14px;
+			font-weight: 500;
+			color: #fff;
+		}
+
+		.leader-row .who .filial {
+			display: block;
+			font-size: 11px;
+			color: rgba(255, 255, 255, .5);
+			font-family: var(--font-mono);
+			margin-top: 2px;
+		}
+
+		.leader-row .coins {
+			display: flex;
+			align-items: center;
+			gap: 6px;
+			font-family: var(--font-mono);
+			font-size: 14px;
+			color: #FFD588;
+			font-weight: 700;
+		}
+
+		.coin-ico {
+			width: 18px;
+			height: 18px;
+			border-radius: 50%;
+			background: linear-gradient(135deg, #FFD588, #C68611);
+			display: grid;
+			place-items: center;
+			font-size: 10px;
+			color: #5C3300;
+			font-weight: 800;
+		}
+
+		.prizes {
+			display: flex;
+			flex-direction: column;
+			gap: 14px;
+		}
+
+		.prize-row {
+			display: grid;
+			grid-template-columns: 50px 1fr auto;
+			gap: 14px;
+			padding: 16px 18px;
+			background: var(--paper);
+			border: 1px solid var(--line);
+			border-radius: 14px;
+			align-items: center;
+		}
+
+		.prize-row .icon {
+			width: 50px;
+			height: 50px;
+			border-radius: 12px;
+			background: var(--gold);
+			color: #fff;
+			display: grid;
+			place-items: center;
+			font-size: 22px;
+		}
+
+		.prize-row.silver .icon {
+			background: #C0C0C0
+		}
+
+		.prize-row.bronze .icon {
+			background: #CD7F32
+		}
+
+		.prize-row .desc h6 {
+			font-size: 16px;
+			font-weight: 600;
+			color: var(--ink);
+		}
+
+		.prize-row .desc p {
+			font-size: 12.5px;
+			color: var(--ink-2);
+			margin-top: 2px;
+		}
+
+		.prize-row .req {
+			font-family: var(--font-mono);
+			font-size: 12px;
+			color: var(--ink-3);
+			text-align: right;
+		}
+
+		/* ============================================================ */
+		/* Q&A SLIDE                                                      */
 		/* ============================================================ */
 		.qa {
 			background: var(--ink);
@@ -1658,11 +2445,12 @@
 		}
 
 		/* ============================================================ */
-		/* ============ THANK YOU SLIDE ================================ */
+		/* THANK YOU                                                      */
 		/* ============================================================ */
 		.ty {
 			background:
-				radial-gradient(ellipse at 80% 20%, rgba(0, 166, 81, .18) 0%, transparent 50%),
+				radial-gradient(ellipse at 80% 20%, rgba(0, 102, 255, .2) 0%, transparent 50%),
+				radial-gradient(ellipse at 20% 80%, rgba(0, 166, 81, .15) 0%, transparent 50%),
 				linear-gradient(180deg, #050914 0%, #0A1428 100%);
 			color: #fff;
 			padding: 0 !important;
@@ -1679,7 +2467,7 @@
 		}
 
 		.ty .ty-wrap .eyebrow {
-			margin-bottom: 32px;
+			margin-bottom: 32px
 		}
 
 		.ty h1 {
@@ -1691,11 +2479,16 @@
 			margin: 0;
 		}
 
-		/* ============================================================ */
-		/* DARK SLIDE BRAND COLOR FIX                                   */
-		/* ============================================================ */
-		.slide.dark .chrome-local .wordmark {
-			color: #fff
+		.ty .next {
+			margin-top: 36px;
+			font-size: 17px;
+			color: rgba(255, 255, 255, .55);
+			max-width: 60ch;
+			line-height: 1.5;
+		}
+
+		.ty .next strong {
+			color: #34D870
 		}
 
 		/* Help overlay */
@@ -1722,74 +2515,9 @@
 			font-family: var(--font-mono);
 		}
 
-		/* Generic number ticker */
 		.tick {
 			display: inline-block;
 			font-variant-numeric: tabular-nums;
-		}
-
-		/* callouts */
-		.callout {
-			display: block;
-			padding: 16px 22px;
-			background: var(--green-mist);
-			border-left: 4px solid var(--green);
-			border-radius: 6px;
-			font-size: 16px;
-			color: var(--ink);
-			max-width: 64ch;
-			line-height: 1.5;
-		}
-
-		/* impact stat big */
-		.impact {
-			display: grid;
-			grid-template-columns: 1fr auto 1fr;
-			gap: 32px;
-			margin-top: 28px;
-			align-items: end;
-		}
-
-		.impact .big {
-			font-size: clamp(56px, 6.5vw, 118px);
-			font-weight: 700;
-			line-height: .9;
-			letter-spacing: -.04em;
-			color: var(--green);
-			font-variant-numeric: tabular-nums;
-		}
-
-		.impact .big.strike {
-			color: var(--ink-3);
-			position: relative;
-		}
-
-		.impact .big.strike::after {
-			content: "";
-			position: absolute;
-			left: -4%;
-			right: -4%;
-			top: 52%;
-			height: 8px;
-			background: var(--red);
-			border-radius: 4px;
-			transform: rotate(-6deg);
-		}
-
-		.impact .lbl {
-			font-size: 16px;
-			color: var(--ink-2);
-			line-height: 1.5;
-			padding-bottom: 12px;
-			max-width: 28ch;
-		}
-
-		.impact .arrow {
-			align-self: center;
-			text-align: center;
-			font-size: 56px;
-			color: var(--ink-3);
-			padding-bottom: 20px;
 		}
 	</style>
 </head>
@@ -1801,7 +2529,7 @@
 		<div class="stage" id="stage">
 
 			<!-- =================================================== -->
-			<!-- PERSISTENT CHROME: Agrobank logo, LIVE · ZOOM, count -->
+			<!-- PERSISTENT CHROME                                    -->
 			<!-- =================================================== -->
 			<div class="chrome" id="chrome">
 				<div class="brand" id="brand">
@@ -1835,14 +2563,14 @@
 				</div>
 				<div class="live" id="live">
 					<span class="dot"></span>
-					<span>Live · Zoom</span>
+					<span>2-Sessiya · Hybrid</span>
 				</div>
-				<div class="counter" id="counter">01 / 23</div>
+				<div class="counter" id="counter">01 / 22</div>
 				<div class="progress"><span id="progressBar"></span></div>
 			</div>
 
 			<!-- =================================================== -->
-			<!-- SLIDES                                               -->
+			<!-- SLIDES                                              -->
 			<!-- =================================================== -->
 			<div class="slides" id="slides">
 
@@ -1856,35 +2584,68 @@
 						<img src="udea-logo.png" alt="UDEA">
 					</div>
 					<div class="badge-row" data-r="1">
-						<div class="badge"><span class="green-dot"></span>Filial rahbarlari uchun</div>
-						<div class="badge">90 daqiqalik treining · Zoom</div>
+						<div class="badge session2"><span
+								style="background:#6EA8FF;width:8px;height:8px;border-radius:50%;display:inline-block;box-shadow:0 0 12px #6EA8FF"></span>2-sessiya
+							· Amaliy seminar</div>
+						<div class="badge"><span class="green-dot"></span>Filial va hududiy boshqarma rahbariyati</div>
+						<div class="badge">90 daqiqa · Zoom + Hybrid</div>
 					</div>
 					<h1 data-r="2">
-						Sun’iy intellekt —<br>
-						<span class="hl">boshqaruvchining</span><br>
-						qo‘lidagi kuch.
+						Yaxshi prompt —<br>
+						<span class="hl-green">aniq topshiriq,</span><br>
+						<span class="hl">aniq natija.</span>
 					</h1>
 					<div class="meta">
 						<div data-r="3">
 							<div class="k">Sana</div>
-							<div class="v">22 aprel 2026</div>
+							<div class="v">29 aprel 2026</div>
 						</div>
 						<div data-r="4">
+							<div class="k">Vaqt</div>
+							<div class="v">15:00 – 16:30 (TST)</div>
+						</div>
+						<div data-r="5">
 							<div class="k">Trener</div>
 							<div class="v">Muhammadsaid Mamasaidov</div>
 						</div>
-						<div data-r="5">
+						<div data-r="6">
 							<div class="k">Tashkilotchi</div>
 							<div class="v">UDEA</div>
 						</div>
 					</div>
-					<!-- Agrobank mark — four corner triangles around a diamond hole, per agrobank-logo.svg -->
-					<svg class="floater" viewBox="0 0 135.01 135.01" fill="none" xmlns="http://www.w3.org/2000/svg"
-						data-r="2" aria-hidden="true">
-						<path d="M0 135.01H67.5L0 67.5V135.01Z" fill="#00A651" />
-						<path d="M67.5 135.01H135.01V67.5L67.5 135.01Z" fill="#00A651" />
-						<path d="M67.5 0L135.01 67.5V0H67.5Z" fill="#00A651" />
-						<path d="M0 0V67.5L67.5 0H0Z" fill="#00A651" />
+					<!-- Floating prompt-bracket motif -->
+					<svg class="floater" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" data-r="2"
+						aria-hidden="true">
+						<defs>
+							<linearGradient id="cv-bg" x1="0" y1="0" x2="1" y2="1">
+								<stop offset="0%" stop-color="#0066FF" stop-opacity=".15" />
+								<stop offset="100%" stop-color="#00A651" stop-opacity=".25" />
+							</linearGradient>
+							<linearGradient id="cv-arrow" x1="0" y1="0" x2="1" y2="0">
+								<stop offset="0%" stop-color="#34D870" />
+								<stop offset="100%" stop-color="#6EA8FF" />
+							</linearGradient>
+						</defs>
+						<!-- terminal frame -->
+						<rect x="40" y="80" width="420" height="340" rx="32" fill="url(#cv-bg)"
+							stroke="rgba(255,255,255,.15)" stroke-width="2" />
+						<!-- title bar dots -->
+						<circle cx="76" cy="118" r="7" fill="#FF5F57" />
+						<circle cx="100" cy="118" r="7" fill="#FFBD2E" />
+						<circle cx="124" cy="118" r="7" fill="#28CA42" />
+						<!-- prompt cursor -->
+						<text x="80" y="200" fill="#34D870" font-family="JetBrains Mono, monospace" font-size="38"
+							font-weight="500">&gt;</text>
+						<rect x="120" y="178" width="240" height="6" rx="3" fill="rgba(255,255,255,.45)" />
+						<rect x="80" y="220" width="320" height="6" rx="3" fill="rgba(255,255,255,.25)" />
+						<rect x="80" y="246" width="200" height="6" rx="3" fill="rgba(255,255,255,.18)" />
+						<!-- arrow down -->
+						<line x1="250" y1="290" x2="250" y2="350" stroke="url(#cv-arrow)" stroke-width="6"
+							stroke-linecap="round" />
+						<polygon points="240,348 260,348 250,372" fill="url(#cv-arrow)" />
+						<!-- output sparkles -->
+						<rect x="120" y="378" width="260" height="6" rx="3" fill="#34D870" opacity=".75" />
+						<rect x="130" y="396" width="220" height="6" rx="3" fill="#34D870" opacity=".5" />
 					</svg>
 				</section>
 
@@ -1893,7 +2654,7 @@
 				<!-- 2. ABOUT ME                                     -->
 				<!-- ============================================== -->
 				<section class="slide">
-					<div class="eyebrow" data-r="1">Tanishuv</div>
+					<div class="eyebrow" data-r="1">Tanishuv · eslatma</div>
 					<div class="about" style="margin-top:8px">
 						<div class="photo-slot" data-r="2">
 							<img src="muhammadsaid-photo.JPG" alt="Muhammadsaid Mamasaidov">
@@ -1931,737 +2692,635 @@
 
 
 				<!-- ============================================== -->
+				<!-- 3. RECAP                                        -->
+				<!-- ============================================== -->
+				<section class="slide">
+					<div class="eyebrow" data-r="1">Qaytadan xush kelibsiz</div>
+					<h2 class="section" data-r="2" style="font-size:56px;max-width:24ch">
+						O‘tgan haftada nimani <span style="color:var(--green)">o‘rgangandik?</span>
+					</h2>
+					<div class="recap" style="margin-top:36px">
+						<div class="recap-card-list" data-r="3">
+							<div class="recap-card">
+								<div class="num">01</div>
+								<div>
+									<h5>SI — bu juda ko‘p o‘qigan to‘ti</h5>
+									<p>Internetdagi millionlab sahifani o‘qigan, lekin har bir javobni tekshirish kerak.
+									</p>
+								</div>
+							</div>
+							<div class="recap-card">
+								<div class="num">02</div>
+								<div>
+									<h5>4 kunlik ish — 1 soatda</h5>
+									<p>Sardoba misolida ko‘rdik: 237 muhojirga subsidiya tahlili — 47 daqiqada.</p>
+								</div>
+							</div>
+							<div class="recap-card">
+								<div class="num">03</div>
+								<div>
+									<h5>3 oltin qoida</h5>
+									<p>Kontekst bering · misol keltiring · yoqmasa qayta so‘rang.</p>
+								</div>
+							</div>
+							<div class="recap-card">
+								<div class="num">04</div>
+								<div>
+									<h5>30 kunlik chaqiriq</h5>
+									<p>Har kuni kamida bitta ishni Claude bilan qiling.</p>
+								</div>
+							</div>
+						</div>
+						<div class="arrow-block" data-r="4">
+							<div class="lab">Bugun · 2-sessiya</div>
+							<h3>Endi <span class="hl">promptni</span> mukammal yozishni o‘rganamiz.</h3>
+							<p>O‘tgan dars — "nimaga". Bugun — "qanday". 90 daqiqa, ko‘p mashq, kam slayd. Filial
+								yig‘ilishi bayonotidan harakat yo‘riqnomasini siz yasaysiz.</p>
+						</div>
+					</div>
+				</section>
+
+
+				<!-- ============================================== -->
 				<!-- 3. AGENDA                                       -->
 				<!-- ============================================== -->
 				<section class="slide">
-					<div class="eyebrow" data-r="1">Bugungi reja</div>
+					<div class="eyebrow blue" data-r="1">Bugungi reja · 90 daqiqa</div>
 					<div class="agenda" style="margin-top:32px">
 						<div data-r="2">
-							<h2 class="section">Bugungi darsda <br>nima o‘rganamiz.</h2>
-							<p class="lead" style="margin-top:24px">
-								SI haqida ko‘p eshitgansiz — bugun <strong>uni amalda qo‘llaysiz</strong>.
-								Zoom tugaganida, har biringizda ertasi kuniyoq filialda
-								ishlatishga tayyor 5 ta aniq usul bo‘ladi.
+							<h2 class="section" style="font-size:56px">Kamroq slayd,<br>ko‘proq mashq.</h2>
+							<p class="lead" style="margin-top:20px">
+								Bu slaydlar — sizga eslatma. Bugun siz <strong>Claude</strong> oldida o‘tirib,
+								real promptni yozasiz, qayta yozasiz, takomillashtirasiz. Yakunda — o‘z
+								filialingiz uchun tayyor "harakat yo‘riqnomasi" promptini olib qaytasiz.
 							</p>
+							<div class="callout blue" style="margin-top:22px">
+								<strong>Liderbord faoli</strong> — har bir mashq uchun agrocoinlar to‘planadi.
+							</div>
 						</div>
 						<div class="agenda-list" data-r="3">
-							<div class="item"><span class="num">00</span><span class="label">Boshlang‘ich test —
-									o‘zingizni sinab ko‘ring</span><span class="time">5 daq</span></div>
-							<div class="item"><span class="num">01</span><span class="label">SI qishloq xo‘jaligida —
-									dunyo tajribasi</span><span class="time">10 daq</span></div>
-							<div class="item"><span class="num">02</span><span class="label">Live: Claude.ai — hoziroq
-									qilamiz</span><span class="time">15 daq</span></div>
-							<div class="item"><span class="num">03</span><span class="label">SI nima — chuqur
-									tushuntirish</span><span class="time">10 daq</span></div>
-							<div class="item"><span class="num">04</span><span class="label">Haqiqiy holat: qaytgan
-									muhojirlar</span><span class="time">25 daq</span></div>
-							<div class="item"><span class="num">05</span><span class="label">5 ta foydalanish
-									usullari</span><span class="time">15 daq</span></div>
-							<div class="item"><span class="num">06</span><span class="label">3 ta oltin qoida · Xavflar
-									· Savollar</span><span class="time">15 daq</span></div>
+							<div class="item"><span class="num">00</span><span class="label">Bir prompt — turli natija
+									(eksperiment)</span><span class="time">5 daq</span></div>
+							<div class="item"><span class="num">01</span><span class="label">Sifatli prompt anatomiyasi
+									(RKTFE)</span><span class="time">12 daq</span></div>
+							<div class="item"><span class="num">02</span><span class="label">Yomon vs yaxshi prompt —
+									yonma-yon</span><span class="time">8 daq</span></div>
+							<div class="item"><span class="num">03</span><span class="label">Amaliy: yig‘ilish bayonoti
+									→ vazifalar</span><span class="time">25 daq</span></div>
+							<div class="item"><span class="num">04</span><span class="label">Iterativ yaxshilash — 4 ta
+									harakat</span><span class="time">10 daq</span></div>
+							<div class="item"><span class="num">05</span><span class="label">Memory · Files · Reasoning
+									(2026 yangiliklari)</span><span class="time">15 daq</span></div>
+							<div class="item"><span class="num">06</span><span class="label">Vositalar va prompt
+									kutubxonasi</span><span class="time">8 daq</span></div>
+							<div class="item"><span class="num">07</span><span class="label">Uy vazifasi · liderbord ·
+									savollar</span><span class="time">7 daq</span></div>
 						</div>
 					</div>
 				</section>
 
 
 				<!-- ============================================== -->
-				<!-- 4. WARM-UP TEST                                 -->
+				<!-- 4. EXPERIMENT — same prompt, different answers -->
 				<!-- ============================================== -->
 				<section class="slide">
-					<div class="eyebrow" data-r="1">Boshlang‘ich test</div>
-					<div class="pre-test" style="margin-top:16px">
-						<div data-r="2">
-							<h2 class="section">
-								Avval o‘zingizni<br>
-								<span style="color:var(--green)">sinab ko‘ring.</span>
-							</h2>
-							<p class="lead" style="margin-top:20px">
-								QR kodni skanerlab qisqa testni to‘ldiring. SI bo‘yicha
-								bilimingizni <strong>darsdan oldin</strong> baholab olamiz —
-								keyin, yakunda, natijani solishtiramiz.
+					<div class="eyebrow" data-r="1">00 · Eksperiment · 5 daqiqa</div>
+					<h2 class="section" data-r="2" style="font-size:56px">Bir xil prompt yozing —<br>natijalarni
+						solishtiramiz.</h2>
+					<div class="experiment" style="margin-top:24px">
+						<div data-r="3">
+							<p class="lead" style="margin-top:0">
+								Telefoningizda <strong>claude.ai</strong> oching. Quyidagi promptni
+								<strong>aynan shu so‘zlar bilan</strong> yuboring:
 							</p>
-							<div class="callout" style="margin-top:22px">
-								⏱ <strong>5 daqiqa</strong> · Natijani saqlab qo‘ying — yakunda kerak bo‘ladi.
+							<div class="exp-prompt" data-r="4">
+								Mening filialim samaradorligini oshirish bo‘yicha 5 ta tavsiya bering.
+							</div>
+							<div class="callout gold" style="margin-top:18px;font-size:14.5px">
+								<strong>Vazifa:</strong> Natijani chatga rasm bilan yuboring. Liderbordda <span
+									style="color:#C68611;font-weight:700">+5 tanga</span> mukofot.
 							</div>
 						</div>
-						<div class="qr-block" data-r="3">
-							<img src="qr-code-test.png" alt="Boshlang‘ich test — QR kod">
-							<div class="qr-label">Skanerlang</div>
+						<div class="exp-side" data-r="5">
+							<div class="ans-card">
+								<div class="name">A · Filial #1 · Andijon</div>
+								<div class="ans">"1. Mijozlarga e’tibor 2. Xodimlarni o‘qiting 3. Texnologiya..."</div>
+							</div>
+							<div class="ans-card">
+								<div class="name">B · Filial #2 · Buxoro</div>
+								<div class="ans">"Avval samaradorlikning ta’rifini aniqlaylik. Bu kredit hajmi, mijoz
+									soni, yoki..."</div>
+							</div>
+							<div class="ans-card">
+								<div class="name">C · Filial #3 · Farg‘ona</div>
+								<div class="ans">"Filialingiz haqida ma’lumot bermadingiz. Iltimos, joylashuv, xodimlar
+									soni..."</div>
+							</div>
+							<div class="ans-card ok">
+								<div class="name">→ Xulosa</div>
+								<div class="ans">Bir xil prompt — uch xil javob. Sababi: <strong>kontekst yo‘q</strong>.
+									Buni keyingi slayddan tuzatamiz.</div>
+							</div>
 						</div>
 					</div>
 				</section>
 
 
 				<!-- ============================================== -->
-				<!-- 5. AI IN AGRICULTURE — 4 VIDEO CINEMATIC        -->
-				<!-- ============================================== -->
-				<section class="slide dark" style="padding:0" data-chrome="dark">
-					<div class="agri-grid">
-						<!--
-            VIDEO SOURCES — all four free to use from Pexels.
-            If they don't auto-load, the gradient fallback still looks good.
-            Replace URLs with your own assets at any time.
-          -->
-						<div class="agri-tile" data-fallback="drone">
-							<video autoplay loop muted playsinline src="agriculture-application.mp4" poster=""></video>
-							<div class="agri-caption">
-								<span class="tag">Kompyuter ko‘rishi</span>
-								<h3>Har bir o‘simlikni<br>alohida ko‘radi</h3>
-								<p>Dron kamerasi har bir niholga ID beradi — sog‘lom, kasal yoki nobudga ajratadi</p>
-							</div>
-						</div>
-
-						<div class="agri-tile" data-fallback="vision">
-							<video autoplay loop muted playsinline src="cowork-example.mp4" poster=""></video>
-							<div class="agri-caption">
-								<span class="tag">SI — ofis yordamchisi</span>
-								<h3>Hisobot, memo,<br>taqdimot — SI yozadi</h3>
-								<p>Yig‘ilish xulosasi, kredit memosi, boshqaruvchiga slayd — soatlik ish daqiqalarga
-									hal bo‘ladi</p>
-							</div>
-						</div>
-
-						<div class="agri-tile" data-fallback="harvest">
-							<video autoplay loop muted playsinline src="no-farmer-robot.mp4" poster=""></video>
-							<div class="agri-caption">
-								<span class="tag">Avtonom robotlar</span>
-								<h3>Dala ham, issiqxona ham —<br>fermersiz ishlaydi</h3>
-								<p>Robot traktor, o‘roq kombayn, issiqxona yig‘uvchisi — kun-u tun, charchoqsiz ishlaydi
-								</p>
-							</div>
-						</div>
-
-						<div class="agri-tile" data-fallback="green">
-							<video autoplay loop muted playsinline src="seedance-sample.mp4" poster=""></video>
-							<div class="agri-caption">
-								<span class="tag">Generativ video</span>
-								<h3>Matndan video —<br>bir necha soniyada</h3>
-								<p>Reklama, mijozga tushuntirish, ijtimoiy tarmoq klipi — SI buni bir buyruqda yaratadi
-								</p>
-							</div>
-						</div>
-					</div>
-
-					<div class="agri-banner">
-						<div class="kicker" data-r="1">Bu uzoq kelajak emas — bu bugungi holat</div>
-						<h2 data-r="2">SI dalada ham,<br><span class="hl">ofisda ham ishlamoqda</span></h2>
-					</div>
-				</section>
-
-
-				<!-- ============================================== -->
-				<!-- 5. ICE BREAKER — claude.ai                      -->
+				<!-- 5. WHY PROMPTS MATTER — IMPACT                  -->
 				<!-- ============================================== -->
 				<section class="slide">
-					<div class="eyebrow" data-r="1">Ice breaker — hoziroq sinab ko‘ramiz</div>
-					<div class="icebreak" style="margin-top:16px">
-						<div data-r="2">
-							<h2 class="section">Telefon yoki<br>kompyuteringizda oching:</h2>
-							<div class="url-card" style="margin-top:20px">
-								<div class="small">Brauzerga kiriting — ikkisidan biri</div>
-								<div class="qr-row">
-									<div class="qr-option">
-										<div class="big">claude<span class="slash">.</span>ai</div>
-										<div class="qr-frame">
-											<img alt="QR to claude.ai"
-												src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=https%3A%2F%2Fclaude.ai&margin=0&color=000000&bgcolor=ffffff">
-										</div>
-									</div>
-									<div class="qr-sep">yoki</div>
-									<div class="qr-option">
-										<div class="big">chatgpt<span class="slash">.</span>com</div>
-										<div class="qr-frame">
-											<img alt="QR to chatgpt.com"
-												src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=https%3A%2F%2Fchatgpt.com&margin=0&color=000000&bgcolor=ffffff">
-										</div>
-									</div>
-								</div>
-							</div>
-							<p class="lead" style="margin-top:16px;font-size:14px">
-								<strong>Qaydnoma:</strong> telefon raqami yoki Google hisobi bilan
-								kirish mumkin. Tekin versiya — bizga yetarli.
-							</p>
-						</div>
-
-						<div>
-							<div class="eyebrow blue" data-r="3">Ikkita topshiriq — birini tanlang</div>
-							<div class="task-list" data-r="4" style="margin-top:12px">
-								<div class="task-card">
-									<div class="label">01 · Hazil</div>
-									<h4>"O‘zbek tilida Nasriddin Afandi haqida hazil aytib ber"</h4>
-									<p>Tanlagan SI'ga aynan shu gapni yuboring. Javobni chatda ulashing.</p>
-								</div>
-								<div class="task-card">
-									<div class="label">02 · She’r</div>
-									<h4>"Mening tumanim — Sardoba tarixi haqida ruboiy yozib ber"</h4>
-									<p>O‘z viloyatingizni qo‘ying (Andijon, Qashqadaryo, ...). Natijani o‘qib bering.
-									</p>
-								</div>
-								<div class="callout" style="margin-top:12px">
-									7 daqiqa vaqt. Keyin birga muhokama qilamiz.
-								</div>
-							</div>
-						</div>
-					</div>
-				</section>
-
-
-				<!-- ============================================== -->
-				<!-- 6. WHY DIFFERENT ANSWERS                        -->
-				<!-- ============================================== -->
-				<section class="slide">
-					<div class="eyebrow" data-r="1">Savol</div>
-					<h2 class="section" data-r="2">Javoblaringiz nega<br>bir-biriga o‘xshamadi?</h2>
-					<p class="lead" data-r="3" style="margin-top:24px">
-						Hammangiz <strong>bir xil dastur</strong>ga, <strong>bir xil topshiriq</strong> berdingiz.
-						Lekin javoblar turlicha chiqdi. Nima uchun?
-					</p>
-
-					<div class="why-grid" data-r="4">
-						<div class="why-card">
-							<div class="n">01</div>
-							<div class="t">So‘rov turlicha yozildi</div>
-							<div class="d">Siz qanday yozgan bo‘lsangiz, SI shunday javob beradi. Ozgina o‘zgartirish —
-								boshqa natija beradi.</div>
-						</div>
-						<div class="why-card" style="background:var(--green-mist);border-color:#BBF0CC">
-							<div class="n">02</div>
-							<div class="t">SI "tasodif" bilan javob yozadi</div>
-							<div class="d">U lug‘at emas. Har safar ozgina farq bilan gap tuzadi — xuddi inson singari.
-							</div>
-						</div>
-						<div class="why-card">
-							<div class="n">03</div>
-							<div class="t">U o‘zbek tilini mukammal bilmaydi (hali)</div>
-							<div class="d">U bilgan narsalari asosan ingliz va rus tilidan. O‘zbekcha javob berish u
-								uchun qiyinroq
-								vazifa.</div>
-						</div>
-					</div>
-
-					<div class="callout" style="margin-top:40px" data-r="5">
-						Demak — SI <strong>avtomat narsa emas</strong>. U — <strong>suhbatdosh</strong>. Uni
-						yaxshiroq so‘roq qilish — yaxshiroq javob olish degani.
-					</div>
-				</section>
-
-
-				<!-- ============================================== -->
-				<!-- 7. AI = PARROT                                  -->
-				<!-- ============================================== -->
-				<section class="slide">
-					<div class="parrot">
-						<div>
-							<div class="eyebrow" data-r="1">Asosiy metafora</div>
-							<h1 class="display" data-r="2">
-								SI — bu juda ko‘p
-								<span style="color:var(--green)">o‘qib yuborgan to‘ti</span>.
-							</h1>
-							<p class="lead" data-r="3" style="margin-top:32px">
-								Internetdagi millionlab kitob, maqola, suhbatni o‘qigan.
-								Endi ularga <strong>o‘xshatib gapira oladi</strong> — lekin o‘zi hech narsani
-								"bilmaydi". Ba’zan yaxshi takrorlaydi. Ba’zan — yo‘q. Ba’zan <strong>o‘ylab</strong>
-								chiqadi.
-
-							</p>
-							<div class="callout" data-r="5" style="margin-top:28px">
-								Shuning uchun <strong>har bir javobni tekshirish kerak</strong> — ayniqsa gap raqamlar
-								va
-								faktlarga kelsa.
-							</div>
-						</div>
-						<div class="parrot-art" data-r="6">
-							<!-- Stylized parrot in Agrobank palette -->
-							<svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
-								<defs>
-									<linearGradient id="pgBody" x1="0" y1="0" x2="1" y2="1">
-										<stop offset="0%" stop-color="#34D870" />
-										<stop offset="100%" stop-color="#00A651" />
-									</linearGradient>
-									<linearGradient id="pgWing" x1="0" y1="0" x2="1" y2="1">
-										<stop offset="0%" stop-color="#00A651" />
-										<stop offset="100%" stop-color="#0066FF" />
-									</linearGradient>
-									<linearGradient id="pgBelly" x1="0" y1="0" x2="0" y2="1">
-										<stop offset="0%" stop-color="#FFE08A" />
-										<stop offset="100%" stop-color="#F5A623" />
-									</linearGradient>
-									<radialGradient id="bg" cx=".5" cy=".5">
-										<stop offset="0%" stop-color="#F0FBF4" />
-										<stop offset="100%" stop-color="#E6EFFF" />
-									</radialGradient>
-								</defs>
-
-								<!-- Background disc -->
-								<circle cx="250" cy="250" r="240" fill="url(#bg)" />
-
-								<!-- Perch branch -->
-								<path d="M 60 415 Q 250 432 440 408" stroke="#7A4E22" stroke-width="14" fill="none"
-									stroke-linecap="round" />
-								<path d="M 72 408 Q 250 422 430 402" stroke="#A66C33" stroke-width="5" fill="none"
-									stroke-linecap="round" opacity=".85" />
-
-								<!-- Tail feathers (behind body) -->
-								<path d="M 290 340 Q 365 400 405 445 Q 380 365 330 310 Z" fill="#0066FF" />
-								<path d="M 310 325 Q 395 385 425 425 Q 400 345 350 300 Z" fill="#34D870" />
-								<path d="M 328 308 Q 415 355 438 392 Q 412 330 372 288 Z" fill="#00A651" />
-
-								<!-- Body -->
-								<path
-									d="M 185 200 C 105 225 105 360 180 398 C 278 412 345 372 335 285 C 325 210 280 180 185 200 Z"
-									fill="url(#pgBody)" />
-
-								<!-- Belly accent -->
-								<path
-									d="M 170 270 C 150 290 155 360 195 376 C 246 376 262 340 252 295 C 240 265 210 258 170 270 Z"
-									fill="url(#pgBelly)" opacity=".9" />
-
-								<!-- Wing -->
-								<path
-									d="M 260 215 C 325 225 355 295 330 355 C 295 375 255 360 240 315 C 230 275 235 235 260 215 Z"
-									fill="url(#pgWing)" />
-								<!-- Wing feather lines -->
-								<path d="M 270 245 Q 300 285 290 335" stroke="rgba(0,42,100,.35)" stroke-width="2.5"
-									fill="none" stroke-linecap="round" />
-								<path d="M 285 248 Q 315 290 310 340" stroke="rgba(0,42,100,.35)" stroke-width="2.5"
-									fill="none" stroke-linecap="round" />
-								<path d="M 300 252 Q 325 295 322 340" stroke="rgba(0,42,100,.3)" stroke-width="2.5"
-									fill="none" stroke-linecap="round" />
-
-								<!-- Head -->
-								<circle cx="200" cy="165" r="82" fill="#00A651" />
-								<!-- Head highlight -->
-								<ellipse cx="180" cy="140" rx="32" ry="20" fill="#34D870" opacity=".55" />
-
-								<!-- Crest feathers -->
-								<path d="M 175 95 Q 168 65 180 50 Q 192 70 188 100 Z" fill="#34D870" />
-								<path d="M 198 88 Q 205 55 220 50 Q 220 85 210 105 Z" fill="#F5A623" />
-								<path d="M 220 92 Q 238 70 245 60 Q 238 95 230 112 Z" fill="#0066FF" />
-
-								<!-- Beak -->
-								<path d="M 130 170 C 96 164 80 196 106 214 C 134 219 158 208 166 184 Z"
-									fill="#F5A623" />
-								<path d="M 104 200 C 94 210 106 222 126 220 C 146 217 158 207 155 196 Z"
-									fill="#D88B16" />
-								<circle cx="138" cy="184" r="3" fill="#7A4500" />
-
-								<!-- Eye -->
-								<circle cx="188" cy="155" r="20" fill="#fff" />
-								<circle cx="187" cy="158" r="13" fill="#0A0E1A" />
-								<circle cx="192" cy="151" r="5" fill="#fff" />
-								<circle cx="183" cy="163" r="2" fill="#fff" opacity=".7" />
-
-								<!-- Feet -->
-								<path d="M 215 400 L 210 424 M 225 400 L 225 424 M 235 400 L 240 424" stroke="#F5A623"
-									stroke-width="6" stroke-linecap="round" />
-								<path d="M 270 400 L 265 424 M 280 400 L 280 424 M 290 400 L 295 424" stroke="#F5A623"
-									stroke-width="6" stroke-linecap="round" />
-
-								<!-- Speech bubble -->
-								<g transform="translate(340,70)">
-									<rect x="0" y="0" width="140" height="60" rx="14" fill="#fff" stroke="#E5E7EB"
-										stroke-width="1.5" />
-									<path d="M 26 60 L 30 80 L 50 62 Z" fill="#fff" stroke="#E5E7EB"
-										stroke-width="1.5" />
-									<circle cx="50" cy="30" r="6" fill="#00A651" />
-									<circle cx="70" cy="30" r="6" fill="#0066FF" />
-									<circle cx="90" cy="30" r="6" fill="#F5A623" />
-								</g>
-							</svg>
-						</div>
-					</div>
-				</section>
-
-
-				<!-- ============================================== -->
-				<!-- 8. NOT ALL PARROTS — BEST EMPLOYEE               -->
-				<!-- ============================================== -->
-				<section class="slide">
-					<div class="eyebrow" data-r="1">Lekin muhimi shu</div>
-					<h2 class="section" data-r="2" style="max-width:24ch">
-						Bu to‘ti <strong style="color:var(--green)">dunyoning eng
-							yaxshi bankir va agrar mutaxassislarini</strong> tinglab ulg‘aygan.
+					<div class="eyebrow violet" data-r="1">Nima uchun muhim</div>
+					<h2 class="section" data-r="2" style="font-size:54px;max-width:30ch">
+						Sifatli prompt — boshqaruvchining<br>
+						<span style="color:var(--green)">eng kuchli vositasi.</span>
 					</h2>
-					<p class="lead" data-r="3" style="margin-top:18px;max-width:78ch">
-						U London-Nyu-York banklarining kredit menejerlari, Garvard-MIT
-						moliyachilari, Gollandiya fermerlari va Kaliforniya agroteknologlari
-						yozgan millionlab sahifani o‘qigan. Agar siz <strong>to‘g‘ri
-							so‘rasangiz</strong>, u o‘shalarning mahorati bilan javob qaytaradi.
+					<p class="lead" data-r="3" style="margin-top:20px;max-width:80ch">
+						AI tomonidan berilgan natija to‘g‘ridan-to‘g‘ri yozilgan prompt sifatiga bog‘liq.
+						McKinsey 2025 hisobotiga ko‘ra, sifatli prompt bilan ishlovchi rahbarlar
+						boshqalardan <strong>3.4 baravar</strong> tezroq qaror qabul qiladi.
 					</p>
 
-					<div class="impact" data-r="4">
-						<div>
-							<div class="big">30 yillik</div>
-							<div class="lbl">tajribali bankir + agro maslahatchi</div>
+					<div class="impact-grid" data-r="4">
+						<div class="impact-cell green">
+							<div class="lbl">Vaqt tejashi</div>
+							<div class="num"><span class="tick" data-target="73">73</span><span class="unit">%</span>
+							</div>
+							<div class="desc">Yaxshi prompt yozish — <strong>kunlik 2 soatni</strong> tejaydi (filial
+								rahbarlari, 2025 ko‘rik)</div>
 						</div>
-						<div class="arrow">→</div>
-						<div>
-							<div class="big" style="color:var(--blue)">Cho‘ntagingizda.</div>
-							<div class="lbl">24/7, har qanday tilda, tekin</div>
+						<div class="impact-cell blue">
+							<div class="lbl">Xato kamayishi</div>
+							<div class="num"><span class="tick" data-target="58">58</span><span class="unit">%</span>
+							</div>
+							<div class="desc">Aniq promptli javoblar <strong>kamroq xato</strong> beradi — qayta tahrir
+								kerak emas</div>
+						</div>
+						<div class="impact-cell gold">
+							<div class="lbl">Birinchi urinish</div>
+							<div class="num"><span class="tick" data-target="84">84</span><span class="unit">%</span>
+							</div>
+							<div class="desc"><strong>Birinchi prompt</strong> bo‘sh chiqadi. Iteratsiya — bu xato emas,
+								bu jarayon.</div>
 						</div>
 					</div>
 				</section>
 
 
 				<!-- ============================================== -->
-				<!-- 9. BEST EMPLOYEE (emotional)                    -->
-				<!-- ============================================== -->
-				<section class="slide best center">
-					<div class="quote-mark" data-r="1">"</div>
-					<h1 data-r="2">
-						Bank va agrar sohaning<br>
-						<span class="hl">eng yaxshi xodimi</span><br>
-						cho‘ntakda.
-					</h1>
-					<p class="caption" data-r="3">
-						Endi savol <em>"SI bilan ishlash kerakmi?"</em> emas —
-						<strong>"Qanday qilib har kuni ishlatamiz?"</strong>
-					</p>
-				</section>
-
-
-				<!-- ============================================== -->
-				<!-- 10. CASE STUDY — SARDOBA INTRO                  -->
+				<!-- 6. ANATOMY — RKTFE                              -->
 				<!-- ============================================== -->
 				<section class="slide">
-					<div class="eyebrow blue" data-r="1">Haqiqiy holat · Sardoba tumani</div>
-					<div class="case-intro">
-						<div>
-							<h2 class="section" data-r="2">
-								Chet elda ishlab<br>qaytganlar —<br>
-								<span style="color:var(--blue)">kimga qanday subsidiya?</span>
-							</h2>
-							<p class="lead" data-r="3" style="margin-top:24px">
-								Sardoba tumanida <strong>237 nafar</strong> muhojir Rossiya,
-								Qozog‘iston, Turkiya va Koreyadan qaytdi. Vazifa —
-								ularning har biriga <strong>mos davlat dasturini</strong> taklif qilish.
-							</p>
-							<p class="lead" data-r="4" style="margin-top:14px">
-								Eski usul: filial xodimi har bir oilaga qo‘l bilan hujjat
-								to‘ldiradi — <strong>3-4 kun</strong>.
-							</p>
-							<p class="lead" data-r="5" style="margin-top:14px">
-								SI bilan: shu ishni <strong>1 soatda</strong> qilamiz.
-							</p>
-							<a class="xl-download" href="sample-data.xlsx" download data-r="6">
-								<span class="xl-icon">XLS</span>
-								<span>Ma’lumotni yuklab oling</span>
-								<span class="xl-file">sample-data.xlsx</span>
-							</a>
+					<div class="eyebrow" data-r="1">01 · 12 daqiqa</div>
+					<h2 class="section" data-r="2" style="font-size:48px;max-width:24ch">
+						Sifatli promptning<br>
+						<span style="color:var(--green)">5 ta qismi.</span>
+					</h2>
+					<div class="anatomy" style="margin-top:28px">
+						<div class="anatomy-stack" data-r="3">
+							<div class="anatomy-row r">
+								<div class="letter">R</div>
+								<div class="body">
+									<div class="name">Rol</div>
+									<div class="desc">SI kim sifatida javob bersin? "Sen Agrobank Buxoro filiali
+										boshlig‘isan"</div>
+								</div>
+							</div>
+							<div class="anatomy-row k">
+								<div class="letter">K</div>
+								<div class="body">
+									<div class="name">Kontekst</div>
+									<div class="desc">Vaziyat, ma’lumot, tarix. "12 ta xodim, oylik 8 mlrd kredit, 3 ta
+										TIV"</div>
+								</div>
+							</div>
+							<div class="anatomy-row t">
+								<div class="letter">T</div>
+								<div class="body">
+									<div class="name">Topshiriq</div>
+									<div class="desc">Aniq nima qilish kerak. Ortiqcha so‘z yo‘q. "5 ta tavsiya
+										tayyorla"</div>
+								</div>
+							</div>
+							<div class="anatomy-row f">
+								<div class="letter">F</div>
+								<div class="body">
+									<div class="name">Format</div>
+									<div class="desc">Natija qanday ko‘rinishda? Jadval, ro‘yxat, xat, slayd, JSON?
+									</div>
+								</div>
+							</div>
+							<div class="anatomy-row e">
+								<div class="letter">E</div>
+								<div class="body">
+									<div class="name">Eslatma</div>
+									<div class="desc">Cheklovlar. "150 so‘zdan ortiq emas. Faqat o‘zbekcha. Kod yozma."
+									</div>
+								</div>
+							</div>
 						</div>
-						<div class="data-panel" data-r="6">
-							<div class="dp-head">
-								<div class="dp-title">Sardoba · 2026 Q1</div>
-								<div class="dp-badge">● Jonli ma’lumot</div>
-							</div>
 
-							<div class="stat-row">
-								<div class="s">
-									<div class="lbl">Qaytganlar</div>
-									<div class="num"><span class="tick" data-target="237">237</span></div>
-									<div class="hint">5 davlatdan</div>
-								</div>
-								<div class="s">
-									<div class="lbl">Monitoring</div>
-									<div class="num"><span class="tick" data-target="98">98</span></div>
-									<div class="hint">139 jarayonda</div>
-								</div>
-							</div>
-
-							<div class="dp-title" style="margin-bottom:14px">Qaysi davlatdan qaytgan</div>
-							<div class="bar-viz">
-								<div class="br-row"><span class="c">Rossiya</span>
-									<div class="b">
-										<div class="fill" style="--w:100%"></div>
-									</div><span class="v">158</span>
-								</div>
-								<div class="br-row"><span class="c">Qozog‘iston</span>
-									<div class="b">
-										<div class="fill" style="--w:19%"></div>
-									</div><span class="v">30</span>
-								</div>
-								<div class="br-row"><span class="c">Turkiya</span>
-									<div class="b">
-										<div class="fill" style="--w:12%"></div>
-									</div><span class="v">19</span>
-								</div>
-								<div class="br-row"><span class="c">Koreya</span>
-									<div class="b">
-										<div class="fill" style="--w:7%"></div>
-									</div><span class="v">11</span>
-								</div>
-								<div class="br-row"><span class="c">Boshqa</span>
-									<div class="b">
-										<div class="fill" style="--w:12%"></div>
-									</div><span class="v">19</span>
-								</div>
-							</div>
+						<div class="ex-prompt" data-r="4">
+							<span class="h-r">Sen — Agrobank Buxoro filialining boshlig‘isan.</span>
+							<p><span class="h-k">Filialda 12 xodim, oylik 8 mlrd kredit ulashiladi.
+									So‘nggi 3 oyda 2 ta katta mijoz (TIV) bizdan ketdi —
+									raqobatchi bank arzonroq stavka taklif qildi.</span></p>
+							<p><span class="h-t">Mijozlarni qaytarish uchun aniq 5 ta strategik
+									tavsiya yoz.</span></p>
+							<p><span class="h-f">Har biriga: nomi, qisqa tavsifi (1 jumla),
+									birinchi haftadagi 2 ta amaliy qadam.</span></p>
+							<p><span class="h-e">O‘zbekcha. Rasmiy, ammo sodda. Banking jargon
+									ishlat, lekin tushunarli qilib.</span></p>
 						</div>
 					</div>
 				</section>
 
 
 				<!-- ============================================== -->
-				<!-- 11. CASE STUDY — LIVE CLAUDE DEMO MOCK          -->
+				<!-- 7. BAD vs GOOD                                  -->
 				<!-- ============================================== -->
 				<section class="slide">
-					<div class="eyebrow blue" data-r="1">Jonli namoyish · Claude</div>
-					<h2 class="section" data-r="2" style="font-size:56px">Ma’lumotni Claude'ga beramiz.</h2>
-					<p class="lead" data-r="3" style="margin-top:16px">
-						Excel fayl, PDF ro‘yxat yoki oddiy gapni tashlaymiz. Claude o‘zi
-						tushunadi.
-					</p>
-
-					<div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:32px" data-r="4">
-						<div class="chat-mock">
-							<div class="bar">
-								<span class="dot"></span><span class="dot"></span><span class="dot"></span>
-								<span class="url">claude.ai/chat</span>
-							</div>
-							<div class="body">
-								<div class="msg u">
-									Sardoba tumanidan 237 nafar muhojir qaytdi. Kasbi, yoshi, bandligi va qaysi
-									davlatdan qaytganini yuborayapman (Excel). Har biriga qaysi davlat subsidiyasi mos
-									kelishini aniqlab ber.
-								</div>
-								<div class="msg a">
-									<strong>Tushundim.</strong> Ma’lumotni ko‘rib chiqdim. 237 kishidan:
-									<ul style="margin:10px 0 0 18px; font-size:14px">
-										<li><strong>45 ta</strong> — "Yoshlar tadbirkorligi" dasturiga (30 yoshgacha,
-											10M so‘m)</li>
-										<li><strong>83 ta</strong> — "Qishloq xo‘jaligi startapi" (yer + 30M so‘m
-											kredit)</li>
-										<li><strong>11 ta</strong> — "Ayol tadbirkor" dasturiga mos</li>
-										<li><strong>94 ta</strong> — allaqachon ish bilan ta’minlangan (dastur kerak
-											emas)</li>
-										<li><strong>4 ta</strong> — bola parvarishida, alohida ijtimoiy yordam</li>
-									</ul>
-									<div style="margin-top:10px">Ro‘yxatni Excel'da tayyorladim. Yuborayinmi?</div>
-								</div>
-								<div class="msg u">Yubor. Va har bir dastur uchun namuna xat yoz.</div>
-							</div>
-						</div>
-
-						<div>
-							<div class="eyebrow ink" style="margin-bottom:14px">Siz diqqat qiling</div>
-							<ul
-								style="list-style:none;display:flex;flex-direction:column;gap:14px;font-size:16px;color:var(--ink);line-height:1.5">
-								<li style="padding-left:30px;position:relative">
-									<span
-										style="position:absolute;left:0;top:1px;color:var(--green);font-weight:700;font-size:20px">✓</span>
-									<strong>Excel/PDF'ni tushunadi</strong> — fayldan o‘zi ma’lumot oladi
-								</li>
-								<li style="padding-left:30px;position:relative">
-									<span
-										style="position:absolute;left:0;top:1px;color:var(--green);font-weight:700;font-size:20px">✓</span>
-									<strong>O‘zbekcha gaplashaveradi</strong> — har qanday formulirovka
-								</li>
-								<li style="padding-left:30px;position:relative">
-									<span
-										style="position:absolute;left:0;top:1px;color:var(--green);font-weight:700;font-size:20px">✓</span>
-									<strong>Har bir qarorni izohlaydi</strong> — "nega bu dastur?"
-								</li>
-								<li style="padding-left:30px;position:relative">
-									<span
-										style="position:absolute;left:0;top:1px;color:var(--green);font-weight:700;font-size:20px">✓</span>
-									<strong>Uzoq vazifa</strong> — xat namunalari, shablonlar, hisobot
-								</li>
-							</ul>
-							<div class="callout"
-								style="margin-top:28px;background:var(--blue-light);border-color:var(--blue)">
-								Eng muhimi — bu jonli suhbat. "Yana aytgin", "Qaytadan yoz", "Boshqacha qil" — deb davom
-								ettirish mumkin.
-							</div>
-						</div>
-					</div>
-				</section>
-
-
-				<!-- ============================================== -->
-				<!-- 12. RESULTS VIZ                                 -->
-				<!-- ============================================== -->
-				<section class="slide">
-					<div class="eyebrow blue" data-r="1">Natija · 47 daqiqada</div>
+					<div class="eyebrow red" data-r="1">02 · Yonma-yon taqqoslash</div>
 					<h2 class="section" data-r="2" style="font-size:52px">
-						Xodim 4 kun qilardi — Claude <span style="color:var(--green)">47 daqiqa</span>da qildi.
+						Bitta vazifa, ikkita prompt —<br>
+						<span style="color:var(--green)">tafovutni ko‘ring.</span>
 					</h2>
-
-					<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:24px;margin-top:48px" data-r="3">
-						<div class="why-card" style="background:var(--paper)">
-							<div class="n" style="color:var(--green);font-weight:700">45</div>
-							<div class="t" style="font-size:17px">Yoshlar tadbirkorligi</div>
-							<div class="d">30 yoshgacha, avtomat mos kelganlar. Har biri uchun xat + hujjat ro‘yxati.
+					<div class="compare" data-r="3">
+						<div class="cmp-card bad">
+							<div class="head">
+								<span class="pill">Yomon</span>
+								<h4>Bo‘sh, umumiy</h4>
+							</div>
+							<div class="pmt">Mijozga rad etish xati yoz.</div>
+							<div class="out">
+								"<strong>Hurmatli mijoz!</strong> Sizning arizangiz ko‘rib chiqildi. Afsuski, hozircha
+								rad etishga majburmiz. Iltimos, kelajakda yana murojaat qiling..."
+								<br><br>
+								— shabloncha, hech kim uchun. Mijoz nimaga rad etilganini bilmaydi, qayta urinishni
+								qachon va qanday qilishni bilmaydi.
 							</div>
 						</div>
-						<div class="why-card" style="background:var(--paper)">
-							<div class="n" style="color:var(--green);font-weight:700">83</div>
-							<div class="t" style="font-size:17px">Qishloq xo‘jaligi</div>
-							<div class="d">Yer talab qilganlar. Qaysi MFY'da qanday er bor — bilan juftlandi.</div>
-						</div>
-						<div class="why-card" style="background:var(--paper)">
-							<div class="n" style="color:var(--green);font-weight:700">11</div>
-							<div class="t" style="font-size:17px">Ayol tadbirkor</div>
-							<div class="d">Maxsus dastur. Har biriga tayyor namuna xat yozildi.</div>
-						</div>
-						<div class="why-card" style="background:#EEFBF3;border-color:#A7E4BE">
-							<div class="n" style="color:var(--green);font-weight:700">98</div>
-							<div class="t" style="font-size:17px">Allaqachon tekshirilgan</div>
-							<div class="d">94 tasi ish bilan ta’minlangan, 4 tasi bola parvarishida — dastur kerak emas.
+						<div class="cmp-card good">
+							<div class="head">
+								<span class="pill">Yaxshi</span>
+								<h4>Aniq, individual</h4>
+							</div>
+							<div class="pmt"><span class="h-r">Sen Agrobank Sardoba filiali kredit menejerisan.</span>
+								<span class="h-k">43 yoshli fermer Toshpo‘lat aka 50M so‘m kredit so‘ragan, lekin
+									so‘nggi yil hisoboti -12% zarar ko‘rsatgan, garovi yo‘q.</span> <span
+									class="h-t">Unga rad etish xatini yoz.</span> <span class="h-f">Odobli, hurmatli,
+									6-7 jumla, sababi aniq, 6 oyda qayta urinish yo‘lini ko‘rsat.</span>
+							</div>
+							<div class="out">
+								"<strong>Hurmatli Toshpo‘lat aka,</strong> 50M so‘m kredit arizangizni ko‘rib chiqdik.
+								Hozirgi balansingizdagi -12% zarar ko‘rsatkichi va yetarli garov yo‘qligi tufayli
+								arizani ma’qullay olmadik. Maslahat: <strong>6 oy</strong> ichida..."
+								<br><br>
+								— ismni biladi, sababini biladi, qaytish yo‘lini biladi.
 							</div>
 						</div>
-					</div>
-
-					<div class="callout" data-r="4" style="margin-top:40px">
-						<strong>Muhim:</strong> Bu natijani <strong>o‘zingiz ham tekshirdingiz</strong>. Claude —
-						yordamchi, qaror esa sizda.
 					</div>
 				</section>
 
 
 				<!-- ============================================== -->
-				<!-- 13. TIME SAVINGS IMPACT                          -->
+				<!-- 8. DEMO — meeting → action plan (input)         -->
 				<!-- ============================================== -->
-				<section class="slide center">
-					<div class="eyebrow" data-r="1">Mantiqli xulosa</div>
-					<h1 class="display" data-r="2" style="text-align:center;max-width:24ch">
-						<span
-							style="color:var(--ink-3);text-decoration:line-through;text-decoration-color:var(--red);text-decoration-thickness:6px">4
-							kun</span>
-						<span style="color:var(--green)">→ 1 soat.</span>
-					</h1>
-					<p class="caption" data-r="3"
-						style="margin-top:40px;font-size:22px;max-width:60ch;color:var(--ink-2);line-height:1.5">
-						Vaqt tejalgani — bu pul emas. Bu <strong>yangi ish qilish imkoni</strong>.<br>
-						Endi shu 4 kunda yana <strong>4 ta loyiha</strong> yakunlaysiz.
+				<section class="slide">
+					<div class="eyebrow violet" data-r="1">03 · Asosiy mashq · 25 daqiqa</div>
+					<h2 class="section" data-r="2" style="font-size:50px">
+						Yig‘ilish bayonoti → <span style="color:var(--green)">harakat yo‘riqnomasi.</span>
+					</h2>
+					<p class="lead" data-r="3" style="margin-top:14px">
+						Ko‘pchilik filialda yig‘ilish o‘tkazadi, lekin bayonotni quruq matn sifatida arxivga tashlaydi.
+						SI yordamida har bir yig‘ilish — <strong>aniq vazifalar ro‘yxati</strong>ga aylanadi.
 					</p>
-				</section>
 
+					<div class="demo-flow" data-r="4">
+						<div class="demo-card in">
+							<div class="src">📋 KIRISH · <strong>Yig‘ilish bayonoti</strong></div>
+							<h4>Sardoba filiali · 28 aprel · Haftalik</h4>
+							<div class="raw">14:30 boshlandi. Boshliq Bekzod aka.
 
-				<!-- ============================================== -->
-				<!-- 14. 5 USE CASES                                 -->
-				<!-- ============================================== -->
-				<section class="slide">
-					<div class="eyebrow" data-r="1">Kundalik foydalanish</div>
-					<h2 class="section" data-r="2">
-						Ertaga ertalabdanoq<br>boshlashingiz mumkin.
-					</h2>
+								— Q1 plan: 18 mlrd kredit kerak edi, 14.2 mlrd qilindi. Sherzod risk xizmatda muammo bor
+								dedi — anketa 3 kun kechikadi.
 
-					<div class="uc-grid" data-r="3">
-						<div class="uc-card">
-							<div class="icon">
-								<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-									stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-									<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-									<polyline points="14 2 14 8 20 8" />
-									<line x1="9" y1="15" x2="15" y2="15" />
-								</svg>
-							</div>
-							<div class="uc-n">01</div>
-							<h4>Kredit arizasini<br>tahlil qilish</h4>
-							<p>Fermer hujjatini yuklang — Claude risklarni, zaif joylarni topib beradi.</p>
+								— TIV mijozlar: "Asia-Stroy" ketdi (TBC arzonroq). Yangi 2 ta TIV bor — Dilshod aka
+								tekshiradi.
+
+								— Yoshlar tadbirkorligi dasturiga 11 ariza, 4 tasi to‘liq emas.
+
+								— Plyus filialga yangi POS kerak (eski 4 yil ishlagan). Anvar aka byudjet so‘raydi.
+
+								— Keyingi yig‘ilish: 5 may, payshanba.</div>
 						</div>
-
-						<div class="uc-card">
-							<div class="icon">
-								<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-									stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-									<path
-										d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-									<polyline points="22,6 12,13 2,6" />
-								</svg>
-							</div>
-							<div class="uc-n">02</div>
-							<h4>Mijozga<br>xat yozish</h4>
-							<p>Rasmiy xat, ogohlantirish, eslatma — 30 soniyada tayyor shablon.</p>
+						<div class="demo-arrow">
+							<div class="arr">→</div>
+							<div class="lab">Claude<br>+ Prompt</div>
 						</div>
-
-						<div class="uc-card">
-							<div class="icon">
-								<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-									stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-									<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-									<line x1="8" y1="9" x2="16" y2="9" />
-									<line x1="8" y1="13" x2="14" y2="13" />
-								</svg>
+						<div class="demo-card out">
+							<div class="src">✅ NATIJA · <strong>Harakat yo‘riqnomasi</strong></div>
+							<h4>5 ta vazifa · aniq mas’ul · aniq sana</h4>
+							<div class="actions">
+								<div class="action-row">
+									<div class="check">1</div>
+									<div class="task">Risk xizmatdagi anketa kechikishini tekshirish</div>
+									<div class="who">Sherzod</div>
+									<div class="due">30.04</div>
+								</div>
+								<div class="action-row">
+									<div class="check">2</div>
+									<div class="task">2 ta yangi TIV bilan uchrashuv tashkillash</div>
+									<div class="who">Dilshod</div>
+									<div class="due">02.05</div>
+								</div>
+								<div class="action-row">
+									<div class="check">3</div>
+									<div class="task">"Asia-Stroy" qaytarish bo‘yicha taklif tayyorlash</div>
+									<div class="who">Bekzod</div>
+									<div class="due">03.05</div>
+								</div>
+								<div class="action-row">
+									<div class="check">4</div>
+									<div class="task">Yoshlar dasturi: 4 ariza egasini chaqirish, hujjatlarini
+										to‘ldirish</div>
+									<div class="who">Munira</div>
+									<div class="due">04.05</div>
+								</div>
+								<div class="action-row">
+									<div class="check">5</div>
+									<div class="task">Yangi POS terminal bo‘yicha byudjet so‘rovini yozish</div>
+									<div class="who">Anvar</div>
+									<div class="due">05.05</div>
+								</div>
 							</div>
-							<div class="uc-n">03</div>
-							<h4>Hisobotni<br>qisqartirish</h4>
-							<p>50 betlik viloyat hisoboti → 5 ta asosiy xulosa. 2 daqiqada.</p>
-						</div>
-
-						<div class="uc-card">
-							<div class="icon">
-								<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-									stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-									<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-									<circle cx="9" cy="7" r="4" />
-									<path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-									<path d="M16 3.13a4 4 0 0 1 0 7.75" />
-								</svg>
-							</div>
-							<div class="uc-n">04</div>
-							<h4>Yangi xodimni<br>o‘rgatish</h4>
-							<p>"Talabaga tushuntir" degin — Claude bank jargonini oddiy tilga aylantiradi.</p>
-						</div>
-
-						<div class="uc-card">
-							<div class="icon">
-								<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-									stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-									<polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
-									<polyline points="17 6 23 6 23 12" />
-								</svg>
-							</div>
-							<div class="uc-n">05</div>
-							<h4>Bozor<br>tahlili</h4>
-							<p>Raqobatchi banklarning shartlari, narxlar, kampaniyalar — yig‘ib beradi.</p>
 						</div>
 					</div>
 				</section>
 
 
 				<!-- ============================================== -->
-				<!-- 15. 3 GOLDEN RULES                              -->
+				<!-- 9. DEMO — the actual prompt (annotated)         -->
 				<!-- ============================================== -->
 				<section class="slide">
-					<div class="eyebrow" data-r="1">Qanday so‘rash kerak</div>
-					<h2 class="section" data-r="2">
-						3 ta oltin qoida —<br>
-						<span style="color:var(--green)">boshqa hech narsa kerak emas.</span>
+					<div class="eyebrow violet" data-r="1">03 · Mana shu prompt</div>
+					<h2 class="section" data-r="2" style="font-size:46px">
+						Va u promptni tahrir qilamiz.
 					</h2>
+					<p class="lead" data-r="3" style="margin-top:14px">
+						Quyida — yuqoridagi natijani bergan prompt. Har bir bo‘lakni rangida ko‘ring.
+						Endi siz o‘z bayonotingiz bilan shuni yozasiz.
+					</p>
 
-					<div class="rules" data-r="3">
-						<div class="rule-card">
-							<span class="rn">01</span>
-							<h4>Kontekst bering</h4>
-							<p>SI'ga kim ekanligingizni, nima vaziyatdaligingizni ayting. "Bir xat yoz" demang — "Men
-								Buxoro filialining boshlig‘iman, fermerga kredit rad etilgani haqida xat yozay" deng.
+					<div class="anatomy ex-prompt" data-r="4"
+						style="margin-top:24px;font-size:15px;background:var(--ink);color:#fff;padding:36px 44px;border-radius:18px;line-height:1.7;font-family:var(--font-mono);position:relative;overflow:hidden">
+						<span style="color:#34D870;font-weight:600">Sen — Agrobank filiali boshlig‘isan, yig‘ilish
+							bayonotidan amaliy yo‘riqnoma yaratuvchi yordamchisan.</span><br><br>
+						<span style="color:#6EA8FF;font-weight:600">Quyida bizning haftalik filial yig‘ilishimizdan
+							bayonot beraman. Bayonot — qisqa, og‘zaki shaklda yozilgan, ba’zan to‘liq emas. Bizning
+							filialda asosan o‘zbek tilida ishlaymiz, mijozlar — fermerlar va kichik
+							biznes.</span><br><br>
+						<span style="color:#C4A6FF;font-weight:600">Vazifa: bayonotdan har bir aniq harakatni ajratib
+							chiqar. Har bir harakat uchun mas’ul shaxs va realistik muddat tayinla.</span><br><br>
+						<span style="color:#FFD588;font-weight:600">Format: jadval ko‘rinishda — № / Vazifa (1 jumla) /
+							Mas’ul / Muddat (DD.MM). Maksimum 7 ta vazifa, eng muhimlari oldinda.</span><br><br>
+						<span style="color:#FFB6C1;font-weight:600">Eslatma: Mas’ulni faqat bayonotda aytib o‘tilgan
+							ismdan ol. Muddat — keyingi yig‘ilishgacha bo‘lgan kunlardan. O‘zbekcha javob ber, banking
+							terminologiyasini ishlat.</span><br><br>
+						<span style="color:rgba(255,255,255,.5)">[BU YERGA BAYONOT MATNI YOPISHTIRILADI]</span>
+					</div>
+				</section>
+
+
+				<!-- ============================================== -->
+				<!-- 10. ITERATION — 4 moves                         -->
+				<!-- ============================================== -->
+				<section class="slide">
+					<div class="eyebrow blue" data-r="1">04 · Iterativ yaxshilash · 10 daqiqa</div>
+					<h2 class="section" data-r="2" style="font-size:52px">
+						Birinchi javob — <span style="color:var(--red);text-decoration:line-through">eng yaxshi</span>
+						<span style="color:var(--green)">birinchi qadam.</span>
+					</h2>
+					<p class="lead" data-r="3" style="margin-top:14px;max-width:90ch">
+						SI charchamaydi, xafa bo‘lmaydi, qaytadan qilishdan zerikmaydi. Yoqmagan natijani
+						<strong>tekshirib bo‘lganda emas</strong>, <strong>aynan o‘sha chatda</strong> tuzating.
+					</p>
+
+					<div class="iter-grid" data-r="4">
+						<div class="iter-step">
+							<div class="n">HARAKAT 01</div>
+							<h4>Aniqroq qil</h4>
+							<p>Nimasi yoqmadi? Aniq aytib bering — uzoqmi, qisqami, rasmiymi, sodday?</p>
+							<div class="quote">"Bu juda uzun. 5 jumlaga qisqartir, eng muhimlarini qoldir."</div>
+						</div>
+						<div class="iter-step">
+							<div class="n">HARAKAT 02</div>
+							<h4>Misol bilan</h4>
+							<p>Bitta o‘rnak ko‘rsating. SI sizning uslubingizni darhol oladi.</p>
+							<div class="quote">"Mana bizning oldingi xat namunasi: [...] Shu ohangda yoz."</div>
+						</div>
+						<div class="iter-step">
+							<div class="n">HARAKAT 03</div>
+							<h4>O‘zini tekshir</h4>
+							<p>SI'ning o‘ziga "yozganni baholab ber" deyish. U xatolarini topadi.</p>
+							<div class="quote">"Yuqoridagi javobni 1-10 ball baholab ber. Nima yetmaydi? Endi yaxshila."
+							</div>
+						</div>
+						<div class="iter-step">
+							<div class="n">HARAKAT 04</div>
+							<h4>Boshqacha qil</h4>
+							<p>3 variant so‘rang — qaysi yoqsa, shuni rivojlantiring.</p>
+							<div class="quote">"3 ta variantda yoz: rasmiy, do‘stona, qisqa. Men tanlayman."</div>
+						</div>
+					</div>
+
+					<div class="callout violet" data-r="5" style="margin-top:32px">
+						<strong>Sehrli ibora:</strong> "Bu yaxshi, lekin..." — undan keyin nima yoqmaganini aytsangiz,
+						SI o‘sha qismini tuzatadi.
+					</div>
+				</section>
+
+
+				<!-- ============================================== -->
+				<!-- 11. MEMORY — game changer                       -->
+				<!-- ============================================== -->
+				<section class="slide">
+					<div class="eyebrow gold" data-r="1" style="color:#C68611;margin-bottom:14px">05 · 2026 yangiliklari
+						· 5 daqiqa</div>
+					<h2 class="section" data-r="2" style="font-size:44px;max-width:30ch">
+						Memory — bu yil eng katta <span style="color:var(--blue)">o‘zgarish.</span>
+					</h2>
+					<p class="lead" data-r="3" style="margin-top:10px;max-width:90ch;font-size:17px">
+						Endi har safar "Men Sardoba filiali boshlig‘iman..." deb takrorlamaysiz.
+						<strong>Bir marta ayting</strong> — SI esda saqlaydi.
+					</p>
+
+					<div class="memo" data-r="4">
+						<div class="memo-card claude">
+							<div class="brand-pill">● Claude Projects</div>
+							<h4>Filial uchun "loyiha" yarating</h4>
+							<p class="feat">Har bir loyihaga sistema ko‘rsatmasi + fayllar (kredit shartlari, narxlar)
+								yuklanadi. O‘sha loyihada barcha chatlar — ana shu ma’lumotlar bilan ishlaydi.</p>
+							<div class="saved">
+								<div class="lab">Loyihada saqlangan:</div>
+								<div class="item">Filial reyting · 2026 Q1</div>
+								<div class="item">12 xodim ro‘yxati va vazifalari</div>
+								<div class="item">Narx siyosati (PDF, 14 bet)</div>
+								<div class="item">"Rasmiy, ammo iliq" uslub namunasi</div>
+							</div>
+						</div>
+						<div class="memo-card gpt">
+							<div class="brand-pill">● ChatGPT Memory</div>
+							<h4>Avtomatik o‘rganadi</h4>
+							<p class="feat">Suhbat davomida muhim faktlarni o‘zi yozib oladi. "Esingda saqla: men
+								Bekzod..." desangiz, har safar bilib turadi. Sozlamalardan o‘chirish mumkin.</p>
+							<div class="saved">
+								<div class="lab">Esda qolgan ma’lumotlar:</div>
+								<div class="item">Bekzod, 38 yosh, Sardoba boshlig‘i</div>
+								<div class="item">Filial 12 xodim · 8 mlrd oylik kredit</div>
+								<div class="item">Mijozlar — asosan fermerlar</div>
+								<div class="item">Hisobotlar — payshanba</div>
+							</div>
+						</div>
+						<div class="memo-card gemini">
+							<div class="brand-pill">● Gemini Gems</div>
+							<h4>Maxsus yordamchi</h4>
+							<p class="feat">"Mening filial yordamchim" deb nomlangan Gem yarating, bir marta ko‘rsatma
+								yozing — keyin har safar shu yordamchini ochasiz va to‘g‘ridan-to‘g‘ri ish boshlaysiz.
 							</p>
-							<div class="ex">
-								<span class="tag">YAXSHI:</span> "Men Agrobank Buxoro filiali boshlig‘iman. 43 yoshli
-								fermer 50M kredit so‘ragan, riski yuqori. Unga rad etish haqida odobli xat yozay."
+							<div class="saved">
+								<div class="lab">"Filial yordamchim" Gem:</div>
+								<div class="item">Sen Agrobank Sardoba boshlig‘isan</div>
+								<div class="item">O‘zbekcha · rasmiy ohangda</div>
+								<div class="item">Hujjatlarni Excel yoki jadval qil</div>
+								<div class="item">Maxfiy ma’lumotlarni so‘ra</div>
 							</div>
 						</div>
+					</div>
 
-						<div class="rule-card">
-							<span class="rn">02</span>
-							<h4>Misol keltiring</h4>
-							<p>Qanday uslubda bo‘lishini ayting. Bitta eski xatingizni ulashing: "Mana bunday yoz". SI
-								sizning uslubingizni taqlid qiladi.</p>
-							<div class="ex">
-								<span class="tag">YAXSHI:</span> "Mana bizning filialdan avvalgi xat namunasi: [...] Shu
-								uslubdayoq yoz."
+					<div class="memo-headline" data-r="5">
+						<div>
+							<h5>Bugundan boshlash uchun:</h5>
+							<p>Claude'da yangi loyiha oching, "Mening filialim" deb nomlang. 5 daqiqada xodimlar
+								ro‘yxati, oylik raqamlar, va 1-2 ta yaxshi xat namunasini joylang. Mana shunday
+								boshlanadi.</p>
+						</div>
+						<div class="save-mockup">Saqlandi · "Filial konteksti"</div>
+					</div>
+				</section>
+
+
+				<!-- ============================================== -->
+				<!-- 12. FILES & ATTACHMENTS                          -->
+				<!-- ============================================== -->
+				<section class="slide">
+					<div class="eyebrow blue" data-r="1">05 · Fayllar va rasmlar</div>
+					<h2 class="section" data-r="2" style="font-size:50px">
+						Endi promptni yozish shart emas.<br>
+						<span style="color:var(--blue)">Faylni tashlang.</span>
+					</h2>
+					<p class="lead" data-r="3" style="margin-top:14px;max-width:84ch">
+						2026-da modern prompt ko‘pincha 2 jumla + biror fayl. Excel, PDF, hujjat rasmi —
+						Claude va ChatGPT o‘qiydi va siz so‘ragan ko‘rinishda qaytaradi.
+					</p>
+
+					<div class="attach-flow" data-r="4">
+						<div class="attach-tiles">
+							<div class="attach-tile">
+								<div class="ftype">.XLSX</div>
+								<h5>Excel jadval</h5>
+								<p>Mijozlar ro‘yxati, kredit holati, oylik hisobot — formula bilan tahlil.</p>
+							</div>
+							<div class="attach-tile">
+								<div class="ftype">.PDF</div>
+								<h5>Hujjat skani</h5>
+								<p>Pasport, ariza, shartnoma. SI matnni o‘qiydi va kerakli maydonlarini chiqaradi.</p>
+							</div>
+							<div class="attach-tile">
+								<div class="ftype">.JPG</div>
+								<h5>Telefonda rasm</h5>
+								<p>Yig‘ilish doskasidagi yozuvlar, mijoz qo‘lda yozgan ariza — rasmga olib yuborasiz.
+								</p>
+							</div>
+							<div class="attach-tile">
+								<div class="ftype">.MP3</div>
+								<h5>Ovoz yozuvi</h5>
+								<p>Yig‘ilishni to‘g‘ridan-to‘g‘ri yozib oling. SI bayonot yasab beradi.</p>
 							</div>
 						</div>
+						<div class="demo-arrow">
+							<div class="arr">→</div>
+							<div class="lab">+ "Buni jadval<br>qilib qaytar"</div>
+						</div>
+						<div class="attach-result">
+							<div class="lbl">Misol — telefondagi qo‘lda yozilgan ro‘yxat:</div>
+							<h4>"Mana, rasm — siz JSON-ga o‘giring"</h4>
+							<ul>
+								<li>23 ta mijoz ismi va telefon raqami ajratib olindi</li>
+								<li>Har biri uchun status: yangi / faol / muzlatilgan</li>
+								<li>Excel formatida tayyorlandi — yuklab oling</li>
+								<li>Eng tezlikda javob beradiganlar — birinchi 5 ta</li>
+							</ul>
+						</div>
+					</div>
 
-						<div class="rule-card">
-							<span class="rn">03</span>
-							<h4>Yoqmasa — qayta so‘rang</h4>
-							<p>Birinchi javob eng yaxshisi emas. "Qisqaroq qil", "Rasmiyroq bo‘lsin", "Boshqacha variant
-								ham bering". SI charchamaydi.</p>
-							<div class="ex">
-								<span class="tag">YAXSHI:</span> "Bu juda rasmiy. Soddaroq, issiqroq qil. Fermer bobo
-								so‘zi bilan."
+					<div class="callout blue" data-r="5" style="margin-top:24px;font-size:14.5px">
+						<strong>Maslahat:</strong> Excel'ni yuklab, "Bu ma’lumotni 1 sahifalik xulosa qil" deyish —
+						hisobot tayyorlashni 30 daqiqadan 2 daqiqaga qisqartiradi.
+					</div>
+				</section>
+
+
+				<!-- ============================================== -->
+				<!-- 13. REASONING — fast vs deep                    -->
+				<!-- ============================================== -->
+				<section class="slide">
+					<div class="eyebrow violet" data-r="1">05 · "Reasoning" — yangi avlod modellari</div>
+					<h2 class="section" data-r="2" style="font-size:48px;max-width:24ch">
+						Tez javob, yoki<br>
+						<span style="color:var(--violet)">chuqur o‘ylab javob?</span>
+					</h2>
+					<p class="lead" data-r="3" style="margin-top:14px">
+						2025 oxirida yangi avlod SI modellari paydo bo‘ldi: ular savol berishdan oldin <strong>"o‘ylab
+							oladi"</strong> —
+						bir necha daqiqa fikr yuritadi va keyin ancha aniqroq javob beradi. Lekin <strong>har vaqt kerak
+							emas</strong>.
+					</p>
+
+					<div class="reason-grid" data-r="4">
+						<div class="reason-card fast">
+							<div class="icon">⚡</div>
+							<div class="pill">Tez javob</div>
+							<h3>Kundalik vazifalar uchun</h3>
+							<div class="sub">Xat yozish, qisqartirish, tarjima, oddiy savol — 2-3 soniyada javob.</div>
+							<ul class="ex-list">
+								<li>"Mijozga eslatma xati yoz"</li>
+								<li>"Bu PDF'ni 5 jumla qil"</li>
+								<li>"Yig‘ilish bayonotini tahlil qil"</li>
+								<li>"Hujjatdagi imloviy xatolarni topib ber"</li>
+							</ul>
+							<div class="models">
+								<span class="chip">Claude Sonnet 4.6</span>
+								<span class="chip">GPT-5</span>
+								<span class="chip">Gemini 2.5</span>
+							</div>
+						</div>
+						<div class="reason-card deep">
+							<div class="icon">🧠</div>
+							<div class="pill">Chuqur o‘ylash</div>
+							<h3>Murakkab tahlil uchun</h3>
+							<div class="sub">Strategiya, pul tahlili, risk baholash, juda ko‘p o‘zgaruvchili masala — 30
+								soniyadan bir necha daqiqagacha.</div>
+							<ul class="ex-list">
+								<li>"237 mijoz Excel — har biriga subsidiya tanla"</li>
+								<li>"Uch raqobatchining strategiyasini tahlil qil"</li>
+								<li>"Filial 5 yillik o‘sish rejasi tayyorla"</li>
+								<li>"Bu kredit arizasidagi yashirin risklarni top"</li>
+							</ul>
+							<div class="models">
+								<span class="chip">Claude Opus 4.7</span>
+								<span class="chip">GPT-o3</span>
+								<span class="chip">Gemini 2.5 Pro</span>
 							</div>
 						</div>
 					</div>
@@ -2669,42 +3328,131 @@
 
 
 				<!-- ============================================== -->
-				<!-- 16. RED FLAGS / SAFETY                           -->
+				<!-- 14. PROMPT LIBRARY                              -->
 				<!-- ============================================== -->
 				<section class="slide">
-					<div class="eyebrow" style="color:var(--red)" data-r="1">Ehtiyotkorlik</div>
-					<h2 class="section" data-r="2">Xavflar — shuni bilish<br>hayotingizni asrab qoladi.</h2>
+					<div class="eyebrow" data-r="1">06 · Prompt kutubxonasi</div>
+					<h2 class="section" data-r="2" style="font-size:50px">
+						Ertaga ertalab ishlatish uchun<br>
+						<span style="color:var(--green)">5 ta tayyor prompt.</span>
+					</h2>
+					<p class="lead" data-r="3" style="margin-top:14px;font-size:16px;max-width:90ch">
+						Ko‘k chiziq bilan belgilangan joylarni o‘zingizning ma’lumotingiz bilan to‘ldiring va ishga
+						tushuring.
+					</p>
+
+					<div class="lib-grid" data-r="4">
+						<div class="lib-card">
+							<div class="head">
+								<div>
+									<div class="num">01 · YIG‘ILISH</div>
+									<h5>Bayonot → harakat ro‘yxati</h5>
+								</div>
+								<span class="copy-btn">⧉ NUSXA</span>
+							</div>
+							<div class="pmt">Sen Agrobank filial boshlig‘i yordamchisisan. Quyidagi yig‘ilish
+								bayonotidan aniq harakat ro‘yxati yarat: jadval ko‘rinishda (№/Vazifa/Mas’ul/Muddat). 7
+								tadan ko‘p emas, eng muhimlari oldinda. <span class="var">[BAYONOT]</span></div>
+						</div>
+
+						<div class="lib-card">
+							<div class="head">
+								<div>
+									<div class="num">02 · MIJOZ XATI</div>
+									<h5>Rad etish xati — odobli, aniq</h5>
+								</div>
+								<span class="copy-btn">⧉ NUSXA</span>
+							</div>
+							<div class="pmt">Sen Agrobank kredit menejerisan. <span class="var">[ISMI]</span>ga <span
+									class="var">[SUMMA]</span> kredit so‘roviga rad etish xatini yoz. Sabab: <span
+									class="var">[SABAB]</span>. Odobli, hurmatli, 6-7 jumla. Oxirida <span
+									class="var">[OY]</span> oydan keyin qayta urinish yo‘lini ko‘rsat.</div>
+						</div>
+
+						<div class="lib-card">
+							<div class="head">
+								<div>
+									<div class="num">03 · HISOBOT</div>
+									<h5>Uzun matn → 5 ta xulosa</h5>
+								</div>
+								<span class="copy-btn">⧉ NUSXA</span>
+							</div>
+							<div class="pmt">Quyidagi <span class="var">[HUJJAT TURI]</span>ni filial boshlig‘iga 5 ta
+								xulosa shaklida qisqartir. Har biri 1 jumla. Oxirida 2-3 ta savol qo‘sh — boshqaruvchi
+								javob izlashi kerak bo‘lgan. <span class="var">[MATN]</span></div>
+						</div>
+
+						<div class="lib-card">
+							<div class="head">
+								<div>
+									<div class="num">04 · MIJOZ TAHLILI</div>
+									<h5>Excel → mos dastur tanlovi</h5>
+								</div>
+								<span class="copy-btn">⧉ NUSXA</span>
+							</div>
+							<div class="pmt">Yuklangan Excel'da <span class="var">[N]</span> mijoz bor. Har birini
+								quyidagi davlat dasturlaridan biriga taqsim et: yoshlar tadbirkorligi, qishloq xo‘jalik
+								startapi, ayol tadbirkor, mavjud band. Sababini izohla. Natijani jadval qil.</div>
+						</div>
+
+						<div class="lib-card"
+							style="grid-column: span 2; background: linear-gradient(180deg, var(--green-mist), #fff); border-color: #BBF0CC">
+							<div class="head">
+								<div>
+									<div class="num">05 · STRATEGIYA · OPUS 4.7 thinking</div>
+									<h5>Hududiy muammo → harakat rejasi</h5>
+								</div>
+								<span class="copy-btn">⧉ NUSXA</span>
+							</div>
+							<div class="pmt">Sen Agrobank <span class="var">[VILOYAT]</span> hududiy boshqarmasining
+								strateg yordamchisisan. Quyidagi vaziyat berilgan: <span class="var">[VAZIYAT
+									TAVSIFI]</span>. Sababini tahlil qil (3-4 nuqta), qisqa muddatli (1 oy) va uzoq
+								muddatli (6 oy) harakat rejasini tuz. Har bir harakat uchun: kim mas’ul, qancha resurs
+								kerak, qanday muvaffaqiyat o‘lchanadi. <strong>Ehtiyotsiz xulosalardan saqlan, har bir
+									taklifning 1 ta riskini ham ko‘rsat.</strong></div>
+						</div>
+					</div>
+				</section>
+
+
+				<!-- ============================================== -->
+				<!-- 15. RED FLAGS / SAFETY                          -->
+				<!-- ============================================== -->
+				<section class="slide">
+					<div class="eyebrow red" data-r="1">06 · Ehtiyot bo‘ling</div>
+					<h2 class="section" data-r="2" style="font-size:48px">Ko‘p uchraydigan xatolar.</h2>
 
 					<div class="flags" data-r="3">
 						<div class="flag no">
 							<div class="ic">✕</div>
 							<div>
-								<h5>Mijoz pasporti, karta raqami kiritmang</h5>
-								<p>SI kompaniyalari ma’lumotni saqlaydi. Mijoz ma’lumoti — sir. O‘zingiz nomini
-									o‘zgartirib bering: "Fermer A" deb yozing.</p>
+								<h5>Mijoz pasporti, karta, telefon raqami kiritmang</h5>
+								<p>SI kompaniyalari ma’lumotni saqlaydi. Pasport o‘rniga "Fermer A" yozing — natija aniq
+									qoladi, sir saqlanadi.</p>
 							</div>
 						</div>
 						<div class="flag no">
 							<div class="ic">✕</div>
 							<div>
-								<h5>Raqamlarga ko‘r-ko‘rona ishonmang</h5>
-								<p>SI ba’zan raqam "to‘qiydi" (hallyutsinatsiya). Har bir foiz, pul, sana — manbaga
-									qarab tekshiring.</p>
+								<h5>Raqamlarni tekshirmasdan jo‘natmang</h5>
+								<p>SI ba’zan raqam "to‘qiydi" (hallyutsinatsiya). Foiz, summa, sana — har birini
+									hujjatdan tekshiring.</p>
 							</div>
 						</div>
 						<div class="flag no">
 							<div class="ic">✕</div>
 							<div>
-								<h5>Qarorni SI'ga topshirmang</h5>
-								<p>Kredit berish, ishdan bo‘shatish, yozma buyruq — bular <strong>sizning</strong>
-									mas’uliyatingiz. SI — maslahatchi, chol emas.</p>
+								<h5>Bitta promptda 5 ta vazifa qo‘ymang</h5>
+								<p>"Tahlil qil va xat yoz va jadval qil va xulosa chiqar" — har birini alohida so‘rang.
+									Sifat 2-3 baravar yaxshi bo‘ladi.</p>
 							</div>
 						</div>
 						<div class="flag yes">
 							<div class="ic">✓</div>
 							<div>
-								<h5>Umumiy topshiriqlar uchun emin-erkin</h5>
-								<p>Xat, hisobot, tahlil, tarjima, o‘rgatish — bular xavfsiz. Har kuni ishlating.</p>
+								<h5>Memory + Loyiha — har kuni vaqt tejaydi</h5>
+								<p>Bir marta filial kontekstini sozlang. Keyin har safar promptda kontekst yozish shart
+									emas — tezroq, qisqaroq, aniqroq.</p>
 							</div>
 						</div>
 					</div>
@@ -2712,45 +3460,264 @@
 
 
 				<!-- ============================================== -->
-				<!-- 17. 30-DAY CHALLENGE                             -->
+				<!-- 16. TOOLS COMPARISON                            -->
 				<!-- ============================================== -->
-				<section class="slide challenge">
-					<div class="eyebrow blue" data-r="1">Bugundan boshlab</div>
-					<h2 class="section" data-r="2">
-						30 kunlik <span style="color:var(--blue)">chaqiriq.</span>
+				<section class="slide">
+					<div class="eyebrow blue" data-r="1">Vositalar — qaysi qachon kerak</div>
+					<h2 class="section" data-r="2" style="font-size:48px">
+						3 ta asosiy SI <span style="color:var(--green)">— uchovi ham yaxshi.</span>
 					</h2>
-					<p class="lead" data-r="3" style="margin-top:24px">
-						Har kuni <strong>kamida bitta ish</strong>ni Claude bilan qiling.
-						30 kun — va SI siz uchun ona tili bo‘ladi.
+
+					<div class="tools-grid" data-r="3">
+						<div class="tool-card featured">
+							<span class="award">★ TAVSIYA</span>
+							<div class="name">Claude Pro</div>
+							<div class="price">$20/oy · Anthropic</div>
+							<ul class="pros">
+								<li>O‘zbek tilida eng yaxshi yozadi</li>
+								<li>Loyihalar (Projects) — eng kuchli memory tizim</li>
+								<li>Opus 4.7 — chuqur tahlil uchun</li>
+								<li>Excel, PDF, rasm tushunadi</li>
+								<li>Artifacts — kod va hujjatni ko‘rsatish</li>
+							</ul>
+							<div class="best-for">
+								<div class="lab">Bu ish uchun:</div>
+								<div class="v">Strategiya, hujjat tayyorlash, hisobot tahlili</div>
+							</div>
+						</div>
+
+						<div class="tool-card">
+							<div class="name">ChatGPT Plus</div>
+							<div class="price">$20/oy · OpenAI</div>
+							<ul class="pros">
+								<li>Memory avtomatik ishlaydi</li>
+								<li>Voice mode (ovoz bilan suhbat)</li>
+								<li>Internetdan ma’lumot oladi</li>
+								<li>Rasm yaratish (DALL-E)</li>
+								<li>Custom GPTs — maxsus yordamchilar</li>
+							</ul>
+							<div class="best-for">
+								<div class="lab">Bu ish uchun:</div>
+								<div class="v">Voice ishi, internet izlash, vizual material</div>
+							</div>
+						</div>
+
+						<div class="tool-card">
+							<div class="name">Gemini Advanced</div>
+							<div class="price">$20/oy · Google</div>
+							<ul class="pros">
+								<li>Google Workspace bilan bog‘lanadi</li>
+								<li>Gmail, Docs, Sheets'da to‘g‘ridan-to‘g‘ri</li>
+								<li>Juda uzun hujjatlarda yaxshi</li>
+								<li>Gems — maxsus yordamchilar</li>
+								<li>Bepul versiyasi ham yetarli</li>
+							</ul>
+							<div class="best-for">
+								<div class="lab">Bu ish uchun:</div>
+								<div class="v">Gmail, Google Sheets, juda uzun PDF'lar</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="callout" data-r="4" style="margin-top:24px;font-size:14.5px">
+						<strong>Maslahat:</strong> 2 tasini parallel ishlating. Bir vazifani Claude'ga, boshqasini
+						ChatGPT'ga bering — birini yaxshilash uchun ikkinchisining javobidan foydalaning.
+					</div>
+				</section>
+
+
+				<!-- ============================================== -->
+				<!-- 17. PRACTICAL TURN — your filial               -->
+				<!-- ============================================== -->
+				<section class="slide">
+					<div class="eyebrow violet" data-r="1">Endi sizning navbatingiz</div>
+					<h2 class="section" data-r="2" style="font-size:50px">
+						Yakuniy mashq —<br>
+						<span style="color:var(--green)">o‘z filialingiz uchun.</span>
+					</h2>
+					<div class="exercise" style="margin-top:32px">
+						<div class="ex-card" data-r="3">
+							<div class="timer">⏱ 7 daq</div>
+							<div class="label">VAZIFA · YAKKA TARTIBDA</div>
+							<h3>O‘z filial yig‘ilishingizdan<br>harakat yo‘riqnomasi yarating.</h3>
+							<div class="step">
+								<div class="n">01</div>
+								<div>
+									<h5>Claude'da yangi loyiha oching</h5>
+									<p>"Mening filialim" deb nomlang. Memorida saqlash uchun.</p>
+								</div>
+							</div>
+							<div class="step">
+								<div class="n">02</div>
+								<div>
+									<h5>Slayd 09'dagi promptni nusxa oling</h5>
+									<p>O‘zingizning oxirgi yig‘ilishingiz bayonotini joylang.</p>
+								</div>
+							</div>
+							<div class="step">
+								<div class="n">03</div>
+								<div>
+									<h5>Yoqmasa — iteratsiya qiling</h5>
+									<p>4 ta harakat (slayd 10): aniqroq qil, misol bilan, tekshir, boshqacha qil.</p>
+								</div>
+							</div>
+							<div class="step">
+								<div class="n">04</div>
+								<div>
+									<h5>Natijani Zoom chatga yuboring</h5>
+									<p>Ekran rasmini ulashing. <strong>+15 tanga</strong> liderbord uchun.</p>
+								</div>
+							</div>
+						</div>
+
+						<div data-r="4">
+							<p class="lead">
+								Bu mashq — bugungi seminarning eng muhim qismi. Slayd ko‘rib emas,
+								<strong>o‘zingiz Claude'da</strong> yozib o‘rganasiz.
+							</p>
+							<div class="callout violet" style="margin-top:18px">
+								<strong>Eslatma:</strong> Mukammal natija kerak emas. Birinchi promptda 60% natija
+								olsangiz, qolgan 40% iteratsiya bilan.
+							</div>
+							<div class="callout" style="margin-top:14px">
+								<strong>Yordam kerakmi?</strong> Mikrofoningizni yoqing yoki chatga "?" yozing. Onlayn
+								assistentlardan biri yordam beradi.
+							</div>
+						</div>
+					</div>
+				</section>
+
+
+				<!-- ============================================== -->
+				<!-- 18. HOMEWORK — 5-day plan                       -->
+				<!-- ============================================== -->
+				<section class="slide">
+					<div class="eyebrow" data-r="1">07 · Uy vazifasi · 5 kun</div>
+					<h2 class="section" data-r="2" style="font-size:50px">
+						5 kunlik <span style="color:var(--green)">amaliy mashq.</span>
+					</h2>
+					<p class="lead" data-r="3" style="margin-top:14px;max-width:80ch">
+						Har kun bir kichik vazifa. Yakunda — Zoom chatda 5 ta promptni ulashasiz.
+						<strong>Liderbord</strong>da o‘rin va sovg‘a — ushbu mashq natijasiga bog‘liq.
 					</p>
 
-					<div class="cal-grid" data-r="4" id="calGrid">
-						<!-- generated by JS -->
+					<div class="hw-row" data-r="4">
+						<div class="hw-day">
+							<div class="day-label">1-KUN · CHO</div>
+							<div class="day-n">01</div>
+							<h5>Loyiha sozlash</h5>
+							<p>Claude'da "Mening filialim" loyihasini yarating, kontekstni yozing.</p>
+							<span class="reward">+10 tanga</span>
+						</div>
+						<div class="hw-day">
+							<div class="day-label">2-KUN · PAY</div>
+							<div class="day-n">02</div>
+							<h5>Yig‘ilish bayonoti</h5>
+							<p>Bugungi yig‘ilish → harakat yo‘riqnomasi (slayd 09 prompti).</p>
+							<span class="reward">+15 tanga</span>
+						</div>
+						<div class="hw-day">
+							<div class="day-label">3-KUN · JUMA</div>
+							<div class="day-n">03</div>
+							<h5>Mijoz xati</h5>
+							<p>Real bir mijoz uchun rad etish yoki taklif xati yozing.</p>
+							<span class="reward">+15 tanga</span>
+						</div>
+						<div class="hw-day">
+							<div class="day-label">4-KUN · DUSH</div>
+							<div class="day-n">04</div>
+							<h5>Excel tahlil</h5>
+							<p>Filial mijozlari Excel'ini Claude'ga bering, xulosa oling.</p>
+							<span class="reward">+20 tanga</span>
+						</div>
+						<div class="hw-day"
+							style="background:linear-gradient(180deg,var(--green-mist),#fff);border-color:#BBF0CC">
+							<div class="day-label" style="color:var(--green)">5-KUN · SESH</div>
+							<div class="day-n">05</div>
+							<h5>O‘z prompt'ingiz</h5>
+							<p>O‘zingizning yangi promptingizni topshiring — eng yaxshilari liderbordga.</p>
+							<span class="reward">+30 tanga</span>
+						</div>
 					</div>
 
-					<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:40px" data-r="5">
-						<div
-							style="padding:24px;background:var(--paper);border-radius:16px;border:1px solid var(--line)">
-							<div
-								style="font-family:var(--font-mono);font-size:12px;color:var(--ink-3);margin-bottom:8px">
-								1-HAFTA</div>
-							<div style="font-size:18px;font-weight:600;color:var(--ink)">Kundalik xatlar · hisobotlar
+					<div class="callout blue" data-r="5" style="margin-top:28px;font-size:14.5px">
+						Topshiriq qabuli: <strong>Zoom chatda</strong> ekran rasmi yoki matn bilan ulashing.
+						Tashkilotchilar har bir mashqni baholab, liderbordni yangilab boradi.
+					</div>
+				</section>
+
+
+				<!-- ============================================== -->
+				<!-- 19. LEADERBOARD                                  -->
+				<!-- ============================================== -->
+				<section class="slide">
+					<div class="eyebrow gold" style="color:#C68611" data-r="1">Liderbord · ilk bor qo‘llanilmoqda</div>
+					<h2 class="section" data-r="2" style="font-size:48px;max-width:24ch">
+						Agrocoinlar →<br>
+						<span style="color:#C68611">sirli sovg‘alar.</span>
+					</h2>
+					<div class="leader">
+						<div class="leader-board" data-r="3">
+							<div class="lh">
+								<h4>Eng faol qatnashchilar · 2-sessiya</h4>
+								<span class="live">● JONLI</span>
+							</div>
+							<div class="leader-row gold">
+								<div class="rank">1</div>
+								<div class="who">Bekzod Ergashev <span class="filial">Sardoba filiali</span></div>
+								<div class="coins"><span class="coin-ico">¢</span>145</div>
+							</div>
+							<div class="leader-row silver">
+								<div class="rank">2</div>
+								<div class="who">Munira Rasulova <span class="filial">Buxoro filiali</span></div>
+								<div class="coins"><span class="coin-ico">¢</span>132</div>
+							</div>
+							<div class="leader-row bronze">
+								<div class="rank">3</div>
+								<div class="who">Anvar Karimov <span class="filial">Andijon filiali</span></div>
+								<div class="coins"><span class="coin-ico">¢</span>118</div>
+							</div>
+							<div class="leader-row">
+								<div class="rank">4</div>
+								<div class="who">Dilshod Tursunov <span class="filial">Farg‘ona filiali</span></div>
+								<div class="coins"><span class="coin-ico">¢</span>95</div>
+							</div>
+							<div class="leader-row">
+								<div class="rank">5</div>
+								<div class="who">Sherzod Mahmudov <span class="filial">Qashqadaryo filiali</span></div>
+								<div class="coins"><span class="coin-ico">¢</span>87</div>
+							</div>
+							<div class="leader-row" style="opacity:.5">
+								<div class="rank">···</div>
+								<div class="who">Yana 47 ishtirokchi</div>
+								<div class="coins">―</div>
 							</div>
 						</div>
-						<div
-							style="padding:24px;background:var(--paper);border-radius:16px;border:1px solid var(--line)">
-							<div
-								style="font-family:var(--font-mono);font-size:12px;color:var(--ink-3);margin-bottom:8px">
-								2-HAFTA</div>
-							<div style="font-size:18px;font-weight:600;color:var(--ink)">Tahlil · raqam ustida ishlash
+
+						<div class="prizes" data-r="4">
+							<div class="prize-row">
+								<div class="icon">🥇</div>
+								<div class="desc">
+									<h6>1-o‘rin · Premium qurilma</h6>
+									<p>iPad Pro M4 + Claude Max yillik obuna</p>
+								</div>
+								<div class="req">≥150 ¢</div>
 							</div>
-						</div>
-						<div
-							style="padding:24px;background:var(--green-mist);border-radius:16px;border:1px solid #BBF0CC">
-							<div
-								style="font-family:var(--font-mono);font-size:12px;color:var(--green);margin-bottom:8px">
-								3-4-HAFTA</div>
-							<div style="font-size:18px;font-weight:600;color:var(--ink)">Boshqa xodimlarga o‘rgating
+							<div class="prize-row silver">
+								<div class="icon">🥈</div>
+								<div class="desc">
+									<h6>2-o‘rin · O‘quv kursi</h6>
+									<p>"AI for Managers" 6-oylik dastur (UDEA)</p>
+								</div>
+								<div class="req">≥120 ¢</div>
+							</div>
+							<div class="prize-row bronze">
+								<div class="icon">🥉</div>
+								<div class="desc">
+									<h6>3-o‘rin · Texnika</h6>
+									<p>AirPods Pro 3 + ChatGPT Plus 6 oy</p>
+								</div>
+								<div class="req">≥100 ¢</div>
 							</div>
 						</div>
 					</div>
@@ -2758,7 +3725,7 @@
 
 
 				<!-- ============================================== -->
-				<!-- 18. Q&A                                         -->
+				<!-- 20. Q&A                                         -->
 				<!-- ============================================== -->
 				<section class="slide qa dark" data-chrome="dark">
 					<h1 data-r="1">Savollar<span class="q">?</span></h1>
@@ -2769,14 +3736,19 @@
 
 
 				<!-- ============================================== -->
-				<!-- 19. THANK YOU                                    -->
+				<!-- 21. THANK YOU                                    -->
 				<!-- ============================================== -->
 				<section class="slide ty dark" data-chrome="dark">
 					<div class="ty-wrap">
-						<div class="eyebrow blue" data-r="1" style="color:#34D870">
-							Rahmat · 90 daqiqangiz uchun
+						<div class="eyebrow blue" data-r="1" style="color:#6EA8FF">
+							Rahmat · 2-sessiya yakuni
 						</div>
-						<h1 data-r="2">E'tibor uchun rahmat.</h1>
+						<h1 data-r="2">Yaxshi promptlar.<br>Yaxshi natijalar.</h1>
+						<p class="next" data-r="3">
+							Endi 5 kunlik mashq sizni kutadi. Topshiriqlarni <strong>Zoom chatda</strong> ulashing,
+							liderbordda o‘rningizni egallang. Keyingi sessiya — <strong>6-may 2026</strong>:
+							"AI agentlari va avtomatlash".
+						</p>
 					</div>
 				</section>
 
@@ -2792,7 +3764,7 @@
 
 	<script>
 		// ============================================================
-		// PRESENTATION ENGINE
+		// PRESENTATION ENGINE — same as session 1
 		// ============================================================
 		(function () {
 			const slides = document.querySelectorAll('.slide');
@@ -2800,7 +3772,6 @@
 			const counter = document.getElementById('counter');
 			const progressBar = document.getElementById('progressBar');
 			const brandLogo = document.querySelector('.chrome .brand-logo');
-			const deck = document.getElementById('deck');
 			const chrome = document.getElementById('chrome');
 			const total = slides.length;
 			let idx = 0;
@@ -2815,7 +3786,6 @@
 					s.classList.toggle('active', j === idx);
 				});
 
-				// Update chrome mode for dark slides
 				const current = slides[idx];
 				const isDark = current.classList.contains('dark') || current.dataset.chrome === 'dark';
 				if (isDark) {
@@ -2829,7 +3799,6 @@
 				counter.textContent = pad(idx + 1) + ' / ' + pad(total);
 				progressBar.style.width = ((idx + 1) / total * 100) + '%';
 
-				// Animate counting numbers
 				animateTickers(current);
 			}
 
@@ -2843,7 +3812,6 @@
 					const from = 0;
 					function tick(now) {
 						const t = Math.min(1, (now - start) / dur);
-						// ease out
 						const e = 1 - Math.pow(1 - t, 3);
 						el.textContent = Math.round(from + (target - from) * e).toLocaleString('uz');
 						if (t < 1) requestAnimationFrame(tick);
@@ -2852,7 +3820,6 @@
 				});
 			}
 
-			// keyboard nav
 			document.addEventListener('keydown', e => {
 				if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') activate(idx + 1);
 				else if (e.key === 'ArrowLeft' || e.key === 'PageUp') activate(idx - 1);
@@ -2864,16 +3831,13 @@
 				}
 			});
 
-			// click nav
 			document.addEventListener('click', e => {
-				// ignore clicks on interactive elements
 				if (e.target.closest('a, button, input, .no-click')) return;
 				const x = e.clientX, w = window.innerWidth;
 				if (x > w * 0.65) activate(idx + 1);
 				else if (x < w * 0.35) activate(idx - 1);
 			});
 
-			// swipe (touch)
 			let tx = 0;
 			document.addEventListener('touchstart', e => { tx = e.touches[0].clientX }, { passive: true });
 			document.addEventListener('touchend', e => {
@@ -2883,29 +3847,14 @@
 				}
 			});
 
-			// build 30-day calendar
-			const cal = document.getElementById('calGrid');
-			if (cal) {
-				for (let i = 1; i <= 30; i++) {
-					const d = document.createElement('div');
-					d.className = 'cal-day';
-					d.style.setProperty('--i', i);
-					d.textContent = i;
-					cal.appendChild(d);
-				}
-			}
-
-			// initial
 			activate(0);
 
-			// auto-hide cursor after inactivity
 			let cursorTimer;
 			document.addEventListener('mousemove', () => {
 				document.body.style.cursor = 'default';
 				clearTimeout(cursorTimer);
 				cursorTimer = setTimeout(() => { document.body.style.cursor = 'none'; }, 3000);
 			});
-
 		})();
 	</script>
 
